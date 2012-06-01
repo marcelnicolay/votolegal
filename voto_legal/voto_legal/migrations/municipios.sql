@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-INSERT INTO `core_estado` (`id`, `nome`, `sigla`, `pais_id`)
+INSERT INTO `voto_legal_uf` (`id`, `nome`, `sigla`, `pais_id`)
 VALUES
 	(1,'Acre','AC',1),
 	(2,'Alagoas','AL',1),
@@ -37,7 +37,7 @@ VALUES
 	(26,'Sergipe','SE',1),
 	(27,'Tocantins','TO',1);
 
-INSERT INTO `core_cidade` (`id`, `nome`, `estado_id`)
+INSERT INTO `voto_legal_cidade` (`id`, `nome`, `estado_id`)
 VALUES
 	(1,'Acrelândia',1),
 	(2,'Assis Brasil',1),
@@ -5547,7 +5547,7 @@ VALUES
 	(5506,'Wanderlândia',27),
 	(5507,'Xambioá',27);
 
-INSERT INTO `core_pais` (`id`, `nome`)
+INSERT INTO `voto_legal_pais` (`id`, `nome`)
 VALUES
 	(1,'Brasil');
 
