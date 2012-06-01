@@ -1,11 +1,11 @@
 ## Voto Legal
 
 ### Histórias
-* Importar Base de Políticos e Partidos
-* Importar dados de produção legislativa do Transparência Brasil
+* Importar Base de Políticos, Partidos e Casas `@marcelnicolay`
+* Importar dados de produção legislativa do Transparência Brasil `@rcmachado`
 * Indexar notícias do G1 sobre políticos
 * Importar e veicular dados sobre doação
-* Facebook Connect na home
+* Facebook Connect na home `@webord`
 * Busca por candidato na Dashboard
 * Perfil básico do Candidato
 * Like/Unlike do candidato
