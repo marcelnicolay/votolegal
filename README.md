@@ -23,3 +23,9 @@
 * Badges (relevante, irrelevante, tribunal de contas)
 
 ### Fotos
+
+<img src='https://github.com/rcmachado/votolegal/raw/master/imgs/inicial-planning.jpg' width='200' />
+<img src='https://github.com/rcmachado/votolegal/raw/master/imgs/template-home.jpg' width='200' />
+<img src='https://github.com/rcmachado/votolegal/raw/master/imgs/template-candidato.jpg' width='200' />
+<img src='https://github.com/rcmachado/votolegal/raw/master/imgs/template-perfil.jpg' width='200' />
+<img src='https://github.com/rcmachado/votolegal/raw/master/imgs/template-dashboard.jpg' width='200' />
