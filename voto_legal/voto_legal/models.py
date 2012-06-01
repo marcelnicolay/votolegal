@@ -49,9 +49,22 @@ class DoadorPolitico(models.Model):
     politico = models.ForeignKey(Politico)
 
 
+class Pais(models.Model):
+    nome = models.CharField(max_length=150)
+
+    def __unicode__(self):
+        return self.nome
+
+
 class UF(models.Model):
     nome = models.CharField(max_length=50)
     sigla = models.CharField(max_length=2)
+    pais = models.ForeignKey(Pais, default=None, null=True)
+
+
+class Cidade(models.Model):
+    nome = models.CharField(max_length=100)
+    estado = models.ForeignKey(UF)
 
 
 class Cargo(models.Model):
