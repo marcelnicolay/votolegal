@@ -1,8 +1,18 @@
 /*====== General Stuff ======*/
 body { background: url('../img/background.png') transparent repeat center center; }
 
+
+
 /*====== Home Page ======*/
-h1.big { text-transform: uppercase; font-family:'exo-medium'; font-size:4.5em; line-height: 1.5em; text-align:center; margin: 1em 0; letter-spacing: -1px; }
-.home a.entrar { text-transform: uppercase; font-family:'exo-extrabold'; padding: 1em 7em; font-size: 2.4em; margin: 0 auto; display: table; }
+h1.big { text-transform: uppercase; font-family:'exo-medium'; font-size:65px; line-height: 1.5em; text-align:center; margin: 1em 0; letter-spacing: -1px; }
+a.big.btn { text-transform: uppercase; font-family:'exo-extrabold'; padding: 1em 5em; font-size: 30px; margin: 0 auto; display: table; }
+
+
+/*====== Search page ======*/
+.search { display: table; margin:0 auto; float:none; }
+.search .field { font-family:'exo-light'; margin: 0 4% 0 0; padding: 0 8px; font-size: 25px; line-height: 52px; height: 52px; width: 76%; }
+.search .send { font-family:'exo-medium'; font-size: 30px; padding: 0; line-height: 52px; height:52px; width: 20%; text-transform: uppercase; font-family:  }
+
+.search > * { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 
 /*====== ___ ======*/

@@ -1,12 +1,10 @@
 {% extends "base.html" %}
-
 {% block body_start %}<body class='home'>{% endblock %}
-
 {% block content %}
 <section class='container'>
     <div class='row-fuild'>
         <section class='span12'>
-            <h1 class='big'>VotoLegal.org</h1>
+            <h1 class='big title'>VotoLegal.org</h1>
             {% if user.is_authenticated %}
             <h2>You are logged in as: {{ user }}</h2>
             <a href="/logout">Logout</a>
@@ -14,7 +12,7 @@
             <img src="http://graph.facebook.com/{{ user.get_profile.facebook_id }}/picture" /><br />
             <pre>{{ facebook_profile|pprint }}</pre>
             {% else %}
-            <a href='{% url facebook_login %}' class='btn btn-primary entrar'>Entrar</a>
+            <a href='{% url facebook_login %}' class='btn btn-primary entrar big'>Entrar</a>
             {% endif %}
         </section>
     </div>

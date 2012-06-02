@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.generic.simple import direct_to_template
+# from django.views.generic.simple import direct_to_template
 from voto_legal.views import *
 admin.autodiscover()
 
@@ -30,7 +30,7 @@ urlpatterns = patterns('',
     # Politicos archive template
     url(r'^politicos?/?$', archive_politicos, name='archive_politicos'),
 
-    url(r'^ajax/politicos/(?P<nome>[^/]+)/??$', ajax_politicos, name="ajax_politicos"),
+    url(r'^ajax/politicos/(?P<nome>[^/]+)/?$', ajax_politicos, name="ajax_politicos"),
 
     # Facebook something
     url(r'^facebook/login$', 'facebook.views.login', name='facebook_login'),

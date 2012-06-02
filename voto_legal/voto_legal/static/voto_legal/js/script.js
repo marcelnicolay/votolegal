@@ -64,7 +64,7 @@
                     this.$.forms.each(function (e){
                         var $form = $(this),
                             $send = $form.find('.send'),
-                            $input = $form.find('.search');
+                            $input = $form.find('.field');
                             $slug = $form.find('.slug'),
                             change = function(e, ui) {
                                 e.preventDefault();
