@@ -32,8 +32,7 @@ def archive_politicos(request):
     return render(request, 'archive-politico.html')
 
 
-def search_politico(request):
-    nome = request.GET.get('q', '')
+def ajax_politicos(request, nome):
     politicos = (Politico.objects.filter(Q(apelido__icontains=nome) | Q(nome__icontains=nome))
             .order_by('apelido', 'nome')[:20])
     context = {}

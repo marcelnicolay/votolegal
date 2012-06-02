@@ -6,7 +6,12 @@
 <section class='container'>
     <div class='row-fuild'>
         <section class='span12'>
-            <h1 class='entrar'>VotoLegal.org</h1>
+            <h1 class='big'>VotoLegal.org</h1>
+            <form class='facebook-connect' action="{% url facebook_connect %}?facebook_login=1" method="post">
+                <a href='#' class='btn btn-primary entrar'>Entrar</a>
+                <input type="hidden" value="{{ request.path }}" name="next" />
+                <input type="hidden" value="{% url dashboard %}" name="redirect" />
+            </form>
             {% if user.is_authenticated %}
             <h2>You are logged in as: {{ user }}</h2>
             <a href="/logout">Logout</a>
