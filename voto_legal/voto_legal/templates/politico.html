@@ -173,6 +173,8 @@
             </section>
             <section class='span5'>
                 <h2>Principais doadores</h2>
+                
+                {% if doadores %}
                 <p>
                 <table class='table table-bordered table-striped'>
                   <thead>
@@ -191,14 +193,21 @@
                   </tbody>
                 </table>
                 </p>
+                {% else %}
+                <h4>não existem doadores para esse político</h4>
+                {% endif %}
             </section>
             <section class='span4'>
                 <h2>Noticias</h2>
+                {% if noticias %}
                 <ul>
                     {% for noticia in noticias %}
                         <li><a href='{{noticia.url}}'>{{noticia.titulo}}</a></li>
                     {% endfor %}
                 </ul>
+                {% else %}
+                <h4>não existem notícias para esse político</h4>
+                {% endif %}
             </section>
 
         </div>
