@@ -36,7 +36,8 @@ class Politico(models.Model):
     @property
     def politicos_relacionados(self):
         return Politico.objects.filter(partido=self.partido, uf=self.uf).exclude(id=self.id)[:10]
-        
+
+
 class Partido(models.Model):
     nome = models.CharField(max_length=100)
     sigla = models.CharField(max_length=10, unique=True)
@@ -44,6 +45,7 @@ class Partido(models.Model):
 
     def __unicode__(self):
         return self.nome
+
 
 class CategoriaProjeto(models.Model):
     nome = models.CharField(max_length=100)
@@ -66,6 +68,7 @@ class CasaGovernamental(models.Model):
     orcamento = models.DecimalField(max_digits=12, decimal_places=2)
     orcamento_por_habitante = models.DecimalField(max_digits=12, decimal_places=2)
     id_referencia = models.IntegerField()
+
     def __unicode__(self):
         return self.nome
 
@@ -77,10 +80,12 @@ class Doador(models.Model):
     def __unicode__(self):
         return self.nome
 
+
 class DoadorPolitico(models.Model):
     doador = models.ForeignKey(Doador)
     politico = models.ForeignKey(Politico)
     valor = models.DecimalField(max_digits=12, decimal_places=2, default=None, null=True)
+
 
 class Pais(models.Model):
     nome = models.CharField(max_length=150)
@@ -96,6 +101,7 @@ class UF(models.Model):
 
     def __unicode__(self):
         return self.sigla
+
 
 class Cidade(models.Model):
     nome = models.CharField(max_length=100)
@@ -156,7 +162,6 @@ class FacebookProfileManager(object):
         #    friends_list = json.loads(url_data)
         #    for friend in friends_list.get('data', []):
         #        my_friends_ids.append(int(friend['id']))
-
 
         my_friends = fb_models.FacebookProfile.objects.filter(facebook_id__in=my_friends_ids)
         response = []

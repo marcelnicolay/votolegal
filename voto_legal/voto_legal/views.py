@@ -8,7 +8,7 @@ from django.contrib.auth import logout
 from facebook.models import FacebookProfile
 
 from voto_legal.models import (Acompanhamento, FacebookProfileManager, Politico,
-    PoliticoCategoriaProjeto, DoadorPolitico)
+    PoliticoCategoriaProjeto, DoadorPolitico, NoticiaAcesso, Noticia)
 
 
 def home(request):
@@ -116,6 +116,15 @@ def ajax_politicos(request, nome):
     return HttpResponse(json.dumps(context), mimetype='application/json')
 
 
+def ver_noticia(request, id):
+    noticia = Noticia.objects.get(pk=id)
+    acessos, _ = NoticiaAcesso.objects.get_or_create(noticia=noticia, facebook=request.user.get_profile())
+    acessos.count += 1
+    acessos.save()
+
+    return HttpResponseRedirect(noticia.url)
+
+
 def seguir_politico(request, slug):
     try:
         politico = Politico.objects.get(slug=slug)
@@ -130,6 +139,7 @@ def seguir_politico(request, slug):
 
     return HttpResponse(json.dumps(context), mimetype='application/json')
 
+
 def esquecer_politico(request, slug):
     try:
         politico = Politico.objects.get(slug=slug)
@@ -143,6 +153,7 @@ def esquecer_politico(request, slug):
     }
 
     return HttpResponse(json.dumps(context), mimetype='application/json')
+
 
 def politicos_que_sigo(request):
     if not request.user.is_authenticated():

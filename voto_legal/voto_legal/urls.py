@@ -30,6 +30,12 @@ urlpatterns = patterns('',
     url(r'^politico/(?P<slug>[^/]+)/esquecer/?$', esquecer_politico, name='esquecer_politico'),
     url(r'^politicos/follow/?$', politicos_que_sigo, name="politicos_que_sigo"),
 
+    # Redirect Noticia template
+    # Exemples:
+    # ver/1429
+    # ver/1044
+    url(r'^ver/(?P<id>[^/]+)/?$', ver_noticia, name='ver_noticia'),
+
     # Politicos archive template
     url(r'^politicos?/?$', archive_politicos, name='archive_politicos'),
 

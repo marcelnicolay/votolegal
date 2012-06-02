@@ -157,6 +157,7 @@
         </div>
         
         <div class='row'>
+
             <section class='span3'>
                 <h2>Políticos relacionados</h2>
                 
@@ -171,7 +172,6 @@
                     </a>
                 </div>
                 {% endfor %}
-                
             </section>
             <section class='span5'>
                 <h2>Principais doadores</h2>
@@ -204,7 +204,7 @@
                 {% if noticias %}
                 <ul>
                     {% for noticia in noticias %}
-                        <li><a href='{{noticia.url}}'>{{noticia.titulo}}</a></li>
+                        <li><a href='/ver/{{noticia.id}}' title='{{noticia.titulo}}'>{{noticia.titulo}}</a></li>
                     {% endfor %}
                 </ul>
                 {% else %}
