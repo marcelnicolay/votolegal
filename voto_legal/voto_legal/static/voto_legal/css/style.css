@@ -27,7 +27,6 @@ a.big.btn { text-transform: uppercase; font-family:'exo-extrabold'; padding: 1em
 .navbar-search .search-query:focus,
 .navbar-search .search-query.focused { padding-left: 30px; }
 .search-query:focus + .icon-search { background-image: url("../img/glyphicons-halflings.png"); }
-​
 
 .search > *,
 .photowrap,
@@ -52,8 +51,8 @@ section {
 .footer {
 margin-top: 45px;
 padding: 35px 0 36px;
-border-top: 1px solid 
-#E5E5E5;
+border-top: 1px solid #E5E5E5;
+background: url('../img/mamba.png') transparent 10px 20px no-repeat;
 }
 .bs-links {
 	margin: 36px 0;

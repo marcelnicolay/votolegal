@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from voto_legal.views import *
+from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -47,4 +48,5 @@ urlpatterns = patterns('',
     url(r'^facebook/login$', 'facebook.views.login', name='facebook_login'),
     url(r'^facebook/authentication_callback$', 'facebook.views.callback', name='facebook-callback'),
 
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 )
