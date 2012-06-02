@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
+{% block meta_opengraph %}
+    <meta property="og:title" content="{{ politico }}"/>
+    <meta property="og:url" content="votolegal.org/politico/{{politico.slug}}"/>
+    <meta property="og:image" content="{{ politico.imagem }}"/>
+    <meta property="og:site_name" content="VotoLegal.org"/>
+{% endblock %}
+
 {% block footer_scripts %}
     {{ block.super }}
     
@@ -98,8 +105,13 @@
             <section class='span12'>
                   <header class="jumbotron subhead" id="overview">
                         <img src='{{politico.imagem}}' align='left' style='margin-right:40px;border:1px solid #666'/>
-                        <h1>{{ politico }}</h1>
-                        <p class="lead">{{ politico.biografia }}</p>
+                        <h1>
+                            {{ politico }}
+                        </h1>
+                        <p class="lead">
+                            {{ politico.biografia }}
+                            <div class="fb-like" data-send="false" data-width="450" data-show-faces="false"></div>
+                        </p>
                   </header>        
             </section>
         </div>
