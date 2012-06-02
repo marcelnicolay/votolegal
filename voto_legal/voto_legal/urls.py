@@ -18,7 +18,7 @@ urlpatterns = patterns('',
     # Login template
     url(r'^logar/?$', login, name='login'),
 
-    url(r'^dashboard/?', dashboard, name="dashboard"),
+    url(r'^dashboard/?$', dashboard, name="dashboard"),
 
     # Politico template
     # Exemples:
@@ -29,7 +29,7 @@ urlpatterns = patterns('',
     # Politicos archive template
     url(r'^politicos?/?$', archive_politicos, name='archive_politicos'),
 
-    url(r'^politicos/buscar/?$', search_politico, name="politico-busca"),
+    url(r'^ajax/politicos/(?P<nome>[^/]+)/??$', ajax_politicos, name="ajax_politicos"),
 
     # Facebook something
     url(r'^fb/', include('django_facebook.urls')),
