@@ -26,6 +26,11 @@ def politico_view(request, slug):
     doadores = DoadorPolitico.objects.filter(politico=politico).order_by('-valor')[:10]
     noticias = politico.noticias.all()[:20]
 
+    user = request.user.get_profile()
+    acompanhamento = None
+    if user:
+        acompanhamento = Acompanhamento.objects.filter(usuario=user, politico=politico)
+        
     total_relevantes = 0
     total_irrelevantes = 0
 
@@ -41,7 +46,8 @@ def politico_view(request, slug):
         'total_relevantes': total_relevantes,
         'total_irrelevantes': total_irrelevantes,
         'doadores': doadores,
-        'noticias': noticias
+        'noticias': noticias,
+        'acompanhamento': acompanhamento
     })
 
 
@@ -93,6 +99,19 @@ def seguir_politico(request, slug):
 
     return HttpResponse(json.dumps(context), mimetype='application/json')
 
+def esquecer_politico(request, slug):
+    try:
+        politico = Politico.objects.get(slug=slug)
+    except Politico.DoesNotExist:
+        raise Http404
+
+    facebook_profile = request.user.get_profile()
+    politico.esquecer(facebook_profile)
+    context = {
+        'status': 'ok',
+    }
+
+    return HttpResponse(json.dumps(context), mimetype='application/json')
 
 def politicos_que_sigo(request):
     if not request.user.is_authenticated():

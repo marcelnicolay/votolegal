@@ -27,6 +27,8 @@ class Politico(models.Model):
     def seguir(self, usuario):
         Acompanhamento.objects.get_or_create(politico=self, usuario=usuario)
 
+    def esquecer(self, usuario):
+        Acompanhamento.objects.filter(politico=self, usuario=usuario).delete()
 
 class Partido(models.Model):
     nome = models.CharField(max_length=100)
