@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block head_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}voto_legal/js/ui-lightness/jquery-ui-1.8.20.custom.css">
+{% endblock %}
+
+{% block content %}
+
+<label for="politico-search-box">Qual o seu candidato?</label>
+<input type="text" id="politico-search-box" autocomplete="off" placeholder="digite o nome do candidato">
+<button type="submit">Ir</button>
+
+{% endblock %}

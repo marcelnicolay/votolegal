@@ -18,8 +18,10 @@ class Politico(models.Model):
     casa_governamental = models.ForeignKey('CasaGovernamental', null=True, default=None)
     id_transparencia = models.IntegerField()
 
+    doadores = models.ManyToManyField('Doador', through='DoadorPolitico')
+    
     def __unicode__(self):
-        return "%s (%s-%s)" % (self.nome, self.partido.sigla, self.uf.sigla)
+        return "%s (%s-%s)" % (self.apelido, self.partido.sigla, self.uf.sigla)
 
 class Partido(models.Model):
     nome = models.CharField(max_length=100)
@@ -55,9 +57,8 @@ class CasaGovernamental(models.Model):
 
 
 class Doador(models.Model):
-    nome = models.CharField(max_length=50)
-    cnpj_cpf = models.CharField(max_length=14)
-    doadores = models.ManyToManyField('Politico', through='DoadorPolitico')
+    nome = models.CharField(max_length=250)
+    cnpj_cpf = models.CharField(max_length=20, unique=True)
 
     def __unicode__(self):
         return self.nome
@@ -65,7 +66,7 @@ class Doador(models.Model):
 class DoadorPolitico(models.Model):
     doador = models.ForeignKey(Doador)
     politico = models.ForeignKey(Politico)
-
+    valor = models.DecimalField(max_digits=12, decimal_places=2, default=None, null=True)
 
 class Pais(models.Model):
     nome = models.CharField(max_length=150)
