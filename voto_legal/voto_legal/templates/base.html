@@ -20,6 +20,7 @@
 {% block head_css %}
     <link href="{{ STATIC_URL }}voto_legal/css/font-face.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="{{ STATIC_URL }}voto_legal/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="{{ STATIC_URL }}css/facebook.css" type="text/css" media="screen" rel="stylesheet" type="text/css" />
     <link href="{{ STATIC_URL }}voto_legal/css/style.css" media="screen" rel="stylesheet" type="text/css" />
 {% endblock %}
 {% block head_script %}
@@ -29,10 +30,8 @@
 {% block head_end %}<head>{% endblock %}
 {% block body_start %}<body class='{{ bodyclass }}'>{% endblock %}
 {% block content %}{% endblock %}
-{% block footer_css %}
-
-{% endblock %}
-{% block footer_scripts %}
+{% block footer_css %}{% endblock %}
+{% block footer_scripts %}<div id="fb-root"></div>
 <script type='text/javascript'>
 yepnope([
     {
@@ -46,9 +45,29 @@ yepnope([
         complete: function (){
             console.log('bootstrap loaded!')
         }
+    },
+    {
+        load: '{{ STATIC_URL }}django_facebook/js/facebook.js',
+        complete: function (){
+            facebookAppId = '{{ FACEBOOK_APP_ID }}';
+            facebookDefaultScope = {{ FACEBOOK_DEFAULT_SCOPE_JS }};
+            staticUrl = '{{ STATIC_URL }}';
+            function facebookJSLoaded(){
+                FB.init({appId: facebookAppId, status: false, cookie: true, xfbml: true, oauth: true});
+            }
+            window.fbAsyncInit = facebookJSLoaded;
+            F = new facebookClass(facebookAppId);
+            F.load();
+            console.log('facebook loaded!')
+        }
+    },
+    {
+        load: '{{ STATIC_URL }}voto_legal/js/script.js',
+        complete: function (){
+            console.log('script loaded!')
+        }
     }
 ]);
-</script>
-{% endblock %}
+</script>{% endblock %}
 {% block body_html_end %}</body>
 </html>{% endblock %}

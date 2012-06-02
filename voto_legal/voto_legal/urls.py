@@ -28,5 +28,6 @@ urlpatterns = patterns('',
     url(r'^politico/?$', archive_politicos),
     url(r'^politicos/?$', archive_politicos),
 
-    url(r'^facebook/?', include('django_facebook.urls')),
+    # Facebook something
+    url(r'^facebook/', include('django_facebook.urls')),
 )
