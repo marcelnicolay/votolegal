@@ -92,12 +92,25 @@
                     	});
                     });
                     
-                    $("#acompanhar").unbind().bind('click', function(e){
-                       e.preventDefault();
-                       $.get('./seguir', function(response){
-                           console.log(">>>", seguindo)
-                       });
-                    });
+                    var seguir = function(e){
+                        $elem = $(e.target)
+                        $.get('/politico/{{politico.slug}}/seguir', function(resposta){
+                            $elem.after('<span class="label label-success">Seguindo</span>');
+                            $elem.remove()
+                        })
+                    }
+                    
+                    var esquecer = function(e){
+                        $elem = $(e.target)
+                        $.get('/politico/{{politico.slug}}/esquecer', function(resposta){
+                            $elem.after('<span class="label label-important">Esquecido</span>');
+                            $elem.remove()
+                        })
+                    }
+                    
+                    $("#acompanhar").unbind().bind('click', seguir);
+                    $("#esquecer").unbind().bind('click', esquecer);
+                    
                 })(jQuery);
             }
         },
@@ -111,8 +124,13 @@
             <section class='span12'>
                   <header class="jumbotron subhead" id="overview">
                         <img src='{{politico.imagem}}' align='left' style='margin-right:40px;border:1px solid #666'/>
-                        
-                          <a class="btn btn-primary btn-success btn-large" href="#" id="acompanhar" style='float:right'>Acompanhar</a>
+                            <div class='actions' style='float:right'>
+                            {% if acompanhamento %}
+                                <a class="btn btn-primary btn-danger btn-large" href="#" id="esquecer">Esquecer</a>
+                            {% else %}
+                                <a class="btn btn-primary btn-success btn-large" href="#" id="acompanhar" >Acompanhar</a>
+                            {% endif %}
+                            </div>
                         <h1>
                             {{ politico }}
                         </h1>

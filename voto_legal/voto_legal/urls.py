@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     # politico/sicrano-soares
     url(r'^politico/(?P<slug>[^/]+)/?$', politico_view, name='single_politico'),
     url(r'^politico/(?P<slug>[^/]+)/seguir/?$', seguir_politico, name='seguir_politico'),
+    url(r'^politico/(?P<slug>[^/]+)/esquecer/?$', esquecer_politico, name='esquecer_politico'),
     url(r'^politicos/follow/?$', politicos_que_sigo, name="politicos_que_sigo"),
 
     # Politicos archive template
