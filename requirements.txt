@@ -4,3 +4,4 @@ mysql-python
 pyquery
 https://github.com/marcelnicolay/simplexml/tarball/master
 https://github.com/tschellenbach/Django-facebook/tarball/master
+PIL

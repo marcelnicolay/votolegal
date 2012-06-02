@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'south',
+    'django_facebook',
     'voto_legal',
 )
 
@@ -153,3 +154,29 @@ LOGGING = {
         },
     }
 }
+
+# Facebook Connection Settings
+# https://github.com/tschellenbach/Django-facebook
+FACEBOOK_APP_ID = "108604439280662"
+
+FACEBOOK_APP_SECRET = "c580582be02ebed790ea93c17c454a3b"
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django_facebook.context_processors.facebook',
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django_facebook.auth_backends.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'
+
+FACEBOOK_REGISTRATION_BACKEND = 'django_facebook.registration_backends.UserenaBackend'
