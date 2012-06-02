@@ -51,8 +51,8 @@ section {
 .footer {
 margin-top: 45px;
 padding: 35px 0 36px;
-border-top: 1px solid 
-#E5E5E5;
+border-top: 1px solid #E5E5E5;
+background: url('../img/mamba.png') transparent 10px 20px no-repeat;
 }
 .bs-links {
 	margin: 36px 0;
