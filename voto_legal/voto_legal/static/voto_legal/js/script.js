@@ -21,5 +21,15 @@
 			}
 		};
 		fbConnect.init();
-	});
+
+        function politico_search(term, cb_response) {
+            $.getJSON("/politicos/buscar", {q: term.term}, function(response) {
+                return cb_response(response.politicos);
+            });
+        }
+        $('#politico-search-box').autocomplete({
+            source: politico_search,
+            minLength: 3
+        });
+    });
 })(jQuery);

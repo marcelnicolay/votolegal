@@ -19,7 +19,7 @@ class Politico(models.Model):
     id_transparencia = models.IntegerField()
 
     def __unicode__(self):
-        return "%s (%s-%s)" % (self.nome, self.partido.sigla, self.uf.sigla)
+        return "%s (%s-%s)" % (self.apelido, self.partido.sigla, self.uf.sigla)
 
 class Partido(models.Model):
     nome = models.CharField(max_length=100)
