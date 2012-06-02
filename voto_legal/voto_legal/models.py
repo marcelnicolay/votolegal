@@ -118,6 +118,12 @@ class NoticiaPolitico(models.Model):
     politico = models.ForeignKey(Politico)
 
 
+class NoticiaAcesso(models.Model):
+    noticia = models.ForeignKey(Noticia)
+    facebook = models.ForeignKey(fb_models.FacebookProfile)
+    count = models.IntegerField(default=0)
+
+
 class FacebookProfileManager(object):
     def __init__(self, facebook_profile):
         self.facebook_profile = facebook_profile
