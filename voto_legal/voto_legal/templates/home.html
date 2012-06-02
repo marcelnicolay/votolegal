@@ -1,19 +1,11 @@
 {% extends "base.html" %}
 {% block body_start %}<body class='home'>{% endblock %}
 {% block content %}
-<section class='container'>
+<section class='container pagespot'>
     <div class='row-fuild'>
         <section class='span12'>
             <h1 class='big title'>VotoLegal.org</h1>
-            {% if user.is_authenticated %}
-            <h2>You are logged in as: {{ user }}</h2>
-            <a href="/logout">Logout</a>
-            <h2>User info</h2>
-            <img src="http://graph.facebook.com/{{ user.get_profile.facebook_id }}/picture" /><br />
-            <pre>{{ facebook_profile|pprint }}</pre>
-            {% else %}
             <a href='{% url facebook_login %}' class='btn btn-primary entrar big'>Entrar</a>
-            {% endif %}
         </section>
     </div>
 </section>
