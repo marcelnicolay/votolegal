@@ -1,19 +1,21 @@
 {% extends "base.html" %}
-{% block head_css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}voto_legal/js/ui-lightness/jquery-ui-1.8.20.custom.css">
-{% endblock %}
 {% block content %}
-<section class='container pagespot'>
-    <div class='row-fuild'>
-        <section class='span12'>
-            <h1 class='big'>Qual o seu candidato?</h1>
-            <form class='politico search span6' action="/ajax/candidato/" method="post">
-                <input class='field' type='text' autocomplete="off" placeholder="digite o nome do candidato" />
-                <input class='slug' type='hidden' />
-                <a href='#' class='btn btn-primary send'>Ir</a>
-            </form>
-        </section>
+<section class='container subhead'>
+    <div class='row-fluid'>
+        <div class='span2 photowrap'>
+            <img src="http://graph.facebook.com/{{ user.get_profile.facebook_id }}/picture?type=large" />
+        </div>
+        <div class='span10'>
+            {% if facebook.link %}<a href='{{ facebook.link }}' target='_blank' class='perfil-title'>{% endif %}<h1>{{ facebook.name }}</h1>{% if facebook.link %}</a>{% endif %}
+            <p class='info'>
+           {% if yearsold %}<span class='idade'>{{ yearsold }} anos</span>, {% endif %}{% if yearsold %}<span class='localizacao'>{{ facebook.location.name }}</span>{% endif %}
+            </p>
+            {% if facebook.bio %}
+            <p class='lead'>
+                {{ facebook.bio }}
+            </p>
+            {% endif %}
+        </div>
     </div>
 </section>
 <section class='container'>
@@ -23,7 +25,7 @@
 
             {% for politico in politicos_que_sigo %}
             <div class="clearfix" style="border-bottom: 1px solid #ccc;padding:5px;">
-                <a href="{% url single_politico politico.slug %}">
+                <a href="#">
                 <img src="{{ politico.imagem }}" alt="{{ politico.nome }}" align="left" width="32">
                 <div style="padding-top:5px;padding-left:40px;">
                     {{ politico.apelido }}<br>
@@ -37,8 +39,8 @@
             <h2>You are logged in as: {{ user }}</h2>
             <a href="/logout">Logout</a>
             <h2>User info</h2>
-            <img src="http://graph.facebook.com/{{ user.get_profile.facebook_id }}/picture?type=large" /><br />
-            <pre>{{ facebook_profile|pprint }}</pre>
+            <br />
+            <pre>{{ facebook|pprint }}</pre>
         </section>
     </div>
 </section>

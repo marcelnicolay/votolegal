@@ -5,6 +5,9 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import logout
 from voto_legal.models import Acompanhamento, Politico, PoliticoCategoriaProjeto, DoadorPolitico
+from facebook.models import FacebookProfile
+from datetime import datetime
+
 
 def home(request):
     facebook_profile = None
@@ -16,17 +19,25 @@ def home(request):
     return render(request, page_render, {'facebook_profile': facebook_profile})
 
 
-def register(request):
-    return render(request, 'register.html')
-
-
-def login(request):
-    return render(request, 'login.html')
-
-
 def facebook_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+
+def perfil_view(request, facebook_id):
+    facebook = get_object_or_404(FacebookProfile, facebook_id=facebook_id)
+    facebookdic = facebook.user.get_profile().get_facebook_profile()
+    if facebookdic.get('birthday', ''):
+        t1 = datetime.strptime(facebookdic['birthday'], '%m/%d/%Y')
+        t2 = datetime.now()
+        tdelta = t2 - t1
+        yearsold = int(float(tdelta.days) / 365.242199)
+    else:
+        yearsold = ''
+    return render(request, 'perfil.html', {
+        "facebook": facebookdic,
+        'yearsold': yearsold
+    })
 
 
 def politico_view(request, slug):
