@@ -1,5 +1,5 @@
 /*====== General Stuff ======*/
-body { background: url('../img/background.png') transparent repeat center center;}
+body { background: url('../img/background.png') transparent repeat center center; padding-top:40px;}
 
 
 
@@ -34,5 +34,5 @@ line-height: 27px;
 }
 
 section {
-padding-top: 60px;
+	padding-top: 20px;
 }

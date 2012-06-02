@@ -4,9 +4,7 @@ from django.db.models import Q
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import logout
-
-from voto_legal.models import Acompanhamento, Politico, PoliticoCategoriaProjeto
-
+from voto_legal.models import Acompanhamento, Politico, PoliticoCategoriaProjeto, DoadorPolitico
 
 def home(request):
     facebook_profile = None
@@ -34,6 +32,8 @@ def facebook_logout(request):
 def politico_view(request, slug):
     politico = get_object_or_404(Politico, slug=slug)
     categorias = PoliticoCategoriaProjeto.objects.filter(politico=politico)
+    doadores = DoadorPolitico.objects.filter(politico=politico).order_by('-valor')[:10]
+    noticias = politico.noticias.all()[:20]
 
     total_relevantes = 0
     total_irrelevantes = 0
@@ -48,7 +48,9 @@ def politico_view(request, slug):
         'politico': politico,
         'categorias': categorias,
         'total_relevantes': total_relevantes,
-        'total_irrelevantes': total_irrelevantes
+        'total_irrelevantes': total_irrelevantes,
+        'doadores': doadores,
+        'noticias': noticias
     })
 
 
@@ -74,7 +76,15 @@ def ajax_politicos(request, nome):
 
 
 def dashboard(request):
-    context = {}
+    facebook_profile = request.user.get_profile()
+    politicos = []
+    for acomp in Acompanhamento.objects.filter(usuario=facebook_profile).all():
+        politico = acomp.politico
+        politicos.append(politico)
+    context = {
+        'politicos_que_sigo': politicos,
+    }
+
     return render(request, 'dashboard.html', context)
 
 
@@ -84,7 +94,7 @@ def seguir_politico(request, slug):
     except Politico.DoesNotExist:
         raise Http404
 
-    facebook_profile = request.user.get_profile().get_facebook_profile()
+    facebook_profile = request.user.get_profile()
     politico.seguir(facebook_profile)
     context = {
         'status': 'ok',

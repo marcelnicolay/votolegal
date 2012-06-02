@@ -37,6 +37,7 @@
         <a class="brand" href="/">votolegal.org</a>
         <div class="nav-collapse collapse">
             <ul class="nav">
+                <li><a href='/dashboard'>painel</a></li>
             </ul>
         </div>
         <ul class="nav pull-right">
@@ -58,6 +59,14 @@
 
 {% block footer_css %}{% endblock %}
 {% block footer_scripts %}<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=108604439280662";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <script type='text/javascript'>
 yepnope([
     {
