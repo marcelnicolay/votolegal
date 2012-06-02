@@ -35,7 +35,12 @@ def search_politico(request):
             .order_by('apelido', 'nome')[:20])
     context = {}
     if politicos:
-        context['politicos'] = [str(p) for p in politicos]
+        context['politicos'] = []
+        for p in politicos:
+            context['politicos'].append({
+                'label': p.apelido,
+                'value': p.slug,
+            })
     else:
         context['politicos'] = None
 
