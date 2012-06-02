@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'south',
+    'userena',
     'django_facebook',
     'voto_legal',
 )
@@ -184,3 +185,6 @@ FACEBOOK_REGISTRATION_BACKEND = 'django_facebook.registration_backends.UserenaBa
 FACEBOOK_DEFAULT_SCOPE = ['email', 'user_about_me', 'user_birthday', 'publish_stream', 'publish_actions', 'offline_access']
 
 FACEBOOK_STORE_ALL_ACCESS_TOKENS = True
+
+# django-guardian requires an anonymous user
+ANONYMOUS_USER_ID = -1

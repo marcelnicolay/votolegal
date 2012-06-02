@@ -13,7 +13,7 @@
 					$button.on({
 						'click': function (e){
 							e.preventDefault();
-							F.connect($this.parents('form'));
+							F.connect($this);
 							return;
 						}
 					});

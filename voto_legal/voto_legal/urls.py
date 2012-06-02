@@ -29,5 +29,5 @@ urlpatterns = patterns('',
     url(r'^politicos/?$', archive_politicos),
 
     # Facebook something
-    url(r'^facebook/', include('django_facebook.urls')),
+    url(r'^fb/', include('django_facebook.urls')),
 )
