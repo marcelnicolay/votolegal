@@ -43,31 +43,6 @@ facebookClass.prototype = {
        return defaultScope;
     },
     
-    connect: function (formElement, requiredPerms) {
-        requiredPerms = requiredPerms || this.getDefaultScope();
-        var scope = this;
-        FB.login(function(response) {
-            if (response.authResponse) {
-                console.log('Welcome!  Fetching your information.... ');
-                FB.api('/me', function(response) {
-                    console.log(response);
-                });
-                $.ajax({
-                    url: formElement.attr('action'),
-                    success: function (data, status){
-                        console.log(data);
-                        console.log(status);
-                    }
-                });
-            } else {
-                console.log('User cancelled login or did not fully authorize.');
-            }
-        },
-        {scope: requiredPerms.join(',')}
-        );
-    },
-    
-    
     load: function () {
         var facebookScript = document.getElementById('facebook_js');
         if (!facebookScript) {

@@ -21,7 +21,7 @@ class Politico(models.Model):
     doadores = models.ManyToManyField('Doador', through='DoadorPolitico')
     
     def __unicode__(self):
-        return "%s (%s-%s)" % (self.nome, self.partido.sigla, self.uf.sigla)
+        return "%s (%s-%s)" % (self.apelido, self.partido.sigla, self.uf.sigla)
 
 class Partido(models.Model):
     nome = models.CharField(max_length=100)

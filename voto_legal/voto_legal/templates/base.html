@@ -47,6 +47,12 @@ yepnope([
         }
     },
     {
+        load: '{{ STATIC_URL }}voto_legal/js/jquery-ui.min.js',
+        complete: function (){
+            console.log('jquery-ui loaded!')
+        }
+    },
+    {
         load: '{{ STATIC_URL }}django_facebook/js/facebook.js',
         complete: function (){
             facebookAppId = '{{ FACEBOOK_APP_ID }}';

@@ -8,6 +8,7 @@
             <form class='facebook-connect' action="{% url facebook_connect %}?facebook_login=1" method="post">
                 <a href='#' class='btn btn-primary entrar'>Entrar</a>
                 <input type="hidden" value="{{ request.path }}" name="next" />
+                <input type="hidden" value="/dashboard" name="redirect" />
             </form>
         </section>
     </div>
