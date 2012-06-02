@@ -69,11 +69,7 @@ def dashboard(request):
     politicos = []
     for acomp in Acompanhamento.objects.filter(usuario=facebook_profile).all():
         politico = acomp.politico
-        politicos.append({
-            'nome': politico.nome,
-            'slug': politico.slug,
-            'avatar': politico.imagem,
-        })
+        politicos.append(politico)
     context = {
         'politicos_que_sigo': politicos,
     }
@@ -87,7 +83,7 @@ def seguir_politico(request, slug):
     except Politico.DoesNotExist:
         raise Http404
 
-    facebook_profile = request.user.get_profile().get_facebook_profile()
+    facebook_profile = request.user.get_profile()
     politico.seguir(facebook_profile)
     context = {
         'status': 'ok',
