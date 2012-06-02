@@ -21,7 +21,8 @@ def home(request):
             politico = acomp.politico
             politicos.append(politico)
 
-        my_friends = FacebookProfileManager(facebook_profile).get_app_friends()
+        fb_profile_manager = FacebookProfileManager(facebook_profile)
+        my_friends = fb_profile_manager.get_app_friends()
 
         context = {
             'politicos_que_sigo': politicos,
@@ -68,11 +69,11 @@ def politico_view(request, slug):
     categorias = PoliticoCategoriaProjeto.objects.filter(politico=politico)
     doadores = DoadorPolitico.objects.filter(politico=politico).order_by('-valor')[:10]
     noticias = politico.noticias.all()[:20]
-
-    user = request.user.get_profile()
+    
+    user = request.user
     acompanhamento = None
-    if user:
-        acompanhamento = Acompanhamento.objects.filter(usuario=user, politico=politico)
+    if not user.is_anonymous():
+        acompanhamento = Acompanhamento.objects.filter(usuario=user.get_profile(), politico=politico)
 
     total_relevantes = 0
     total_irrelevantes = 0
