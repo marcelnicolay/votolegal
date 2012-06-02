@@ -3,6 +3,5 @@ south
 mysql-python
 pyquery
 https://github.com/marcelnicolay/simplexml/tarball/master
-https://github.com/tschellenbach/Django-facebook/tarball/master
+https://github.com/dickeyxxx/django_facebook_oauth/zipball/master
 PIL
-https://github.com/bread-and-pepper/django-userena/tarball/master

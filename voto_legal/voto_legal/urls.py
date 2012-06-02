@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.views.generic.simple import direct_to_template
 from voto_legal.views import *
 admin.autodiscover()
 
@@ -32,5 +33,7 @@ urlpatterns = patterns('',
     url(r'^politicos/buscar/?$', search_politico, name="politico-busca"),
 
     # Facebook something
-    url(r'^fb/', include('django_facebook.urls')),
+    url(r'^facebook/login$', 'facebook.views.login', name='facebook-login'),
+    url(r'^facebook/authentication_callback$', 'facebook.views.authentication_callback'),
+    url(r'^logout$', 'django.contrib.auth.views.logout'),
 )

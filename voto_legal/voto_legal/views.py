@@ -8,7 +8,10 @@ from voto_legal.models import Politico
 
 
 def home(request):
-    return render(request, 'home.html')
+    facebook_profile = None
+    if request.user.is_authenticated():
+        facebook_profile = request.user.get_profile().get_facebook_profile()
+    return render(request, 'home.html', {'facebook_profile': facebook_profile})
 
 
 def register(request):
