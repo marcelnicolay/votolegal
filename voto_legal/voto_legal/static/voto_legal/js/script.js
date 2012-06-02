@@ -29,7 +29,10 @@
         }
         $('#politico-search-box').autocomplete({
             source: politico_search,
-            minLength: 3
+            minLength: 3,
+            select: function(evn, ui) {
+                $('#politico-page').val(ui.item.id);
+            }
         });
     });
 })(jQuery);
