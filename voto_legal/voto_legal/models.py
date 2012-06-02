@@ -22,6 +22,10 @@ class Politico(models.Model):
     def __unicode__(self):
         return "%s (%s-%s)" % (self.apelido, self.partido.sigla, self.uf.sigla)
 
+    def seguir(self, usuario):
+        Acompanhamento.objects.get_or_create(politico=self, usuario=usuario)
+
+
 class Partido(models.Model):
     nome = models.CharField(max_length=100)
     sigla = models.CharField(max_length=10, unique=True)
