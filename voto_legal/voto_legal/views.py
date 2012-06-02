@@ -65,7 +65,19 @@ def ajax_politicos(request, nome):
 
 
 def dashboard(request):
-    context = {}
+    facebook_profile = request.user.get_profile()
+    politicos = []
+    for acomp in Acompanhamento.objects.filter(usuario=facebook_profile).all():
+        politico = acomp.politico
+        politicos.append({
+            'nome': politico.nome,
+            'slug': politico.slug,
+            'avatar': politico.imagem,
+        })
+    context = {
+        'politicos_que_sigo': politicos,
+    }
+
     return render(request, 'dashboard.html', context)
 
 
