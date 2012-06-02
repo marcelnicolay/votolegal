@@ -36,6 +36,13 @@ class CategoriaProjeto(models.Model):
     def __unicode__(self):
         return self.nome
 
+
+class PoliticoCategoriaProjeto(models.Model):
+    politico = models.ForeignKey(Politico)
+    categoria_projeto = models.ForeignKey(CategoriaProjeto)
+    quantidade = models.IntegerField(default=0)
+
+
 class CasaGovernamental(models.Model):
     nome = models.CharField(max_length=50)
     slug = models.SlugField()
