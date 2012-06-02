@@ -28,7 +28,30 @@
 {% endblock %}
 {% block head_end %}<head>{% endblock %}
 {% block body_start %}<body class='{{ bodyclass }}'>{% endblock %}
+
+{% block menu %}
+
+<div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button"class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/">votolegal.org</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+            </ul>
+          </div>
+        </div>
+      </div>
+</div>
+
+{% endblock menu %}
+
 {% block content %}{% endblock %}
+
 {% block footer_css %}{% endblock %}
 {% block footer_scripts %}<div id="fb-root"></div>
 <script type='text/javascript'>
@@ -56,7 +79,7 @@ yepnope([
         complete: function (){
             console.log('script loaded!')
         }
-    }
+    },
 ]);
 </script>{% endblock %}
 {% block body_html_end %}</body>
