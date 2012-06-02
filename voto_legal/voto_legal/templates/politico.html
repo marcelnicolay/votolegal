@@ -155,22 +155,29 @@
         </div>
         
         <div class='row'>
-            <section class='span6'>
-                <h2>Noticias</h2>
-                <ul>
-                    {% for noticia in noticias %}
-                        <li><a href='{{noticia.url}}'>{{noticia.titulo}}</a></li>
-                    {% endfor %}
-                </ul>
+            <section class='span3'>
+                <h2>Políticos relacionados</h2>
+                
+                {% for politico in politico.politicos_relacionados %}
+                <div class="clearfix" style="border-bottom: 1px solid #ccc;padding:5px;">
+                    <a href="{% url single_politico politico.slug %}">
+                    <img src="{{ politico.imagem }}" alt="{{ politico.nome }}" align="left" width="32">
+                    <div style="padding-top:5px;padding-left:40px;">
+                        {{ politico.apelido }}<br>
+                    (<span>{{ politico.partido.sigla }}-{{ politico.uf.sigla }}</span>)
+                    </div>
+                    </a>
+                </div>
+                {% endfor %}
+                
             </section>
-            <section class='span6'>
-                <h2>Principais doadores da campanha</h2>
+            <section class='span5'>
+                <h2>Principais doadores</h2>
                 <p>
                 <table class='table table-bordered table-striped'>
                   <thead>
                     <tr>
                       <th>Nome</th>
-                      <th>CNPJ / CPF</th>
                       <th>Valor</th>
                     </tr>
                   </thead>
@@ -178,7 +185,6 @@
                       {% for doador in doadores %}
                           <tr>
                             <td>{{doador.doador.nome}}</td>
-                            <td>{{ doador.doador.cnpj_cpf }}</td>
                             <td>{{ doador.valor|money }}</td>
                           </tr>
                       {% endfor %}
@@ -186,6 +192,15 @@
                 </table>
                 </p>
             </section>
+            <section class='span4'>
+                <h2>Noticias</h2>
+                <ul>
+                    {% for noticia in noticias %}
+                        <li><a href='{{noticia.url}}'>{{noticia.titulo}}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+
         </div>
     </section>
     

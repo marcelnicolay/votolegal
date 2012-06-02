@@ -33,6 +33,10 @@ class Politico(models.Model):
     def esquecer(self, usuario):
         Acompanhamento.objects.filter(politico=self, usuario=usuario).delete()
 
+    @property
+    def politicos_relacionados(self):
+        return Politico.objects.filter(partido=self.partido, uf=self.uf).exclude(id=self.id)[:10]
+        
 class Partido(models.Model):
     nome = models.CharField(max_length=100)
     sigla = models.CharField(max_length=10, unique=True)

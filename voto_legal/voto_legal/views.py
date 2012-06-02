@@ -60,7 +60,7 @@ def politico_view(request, slug):
     categorias = PoliticoCategoriaProjeto.objects.filter(politico=politico)
     doadores = DoadorPolitico.objects.filter(politico=politico).order_by('-valor')[:10]
     noticias = politico.noticias.all()[:20]
-
+    
     user = request.user.get_profile()
     acompanhamento = None
     if user:
