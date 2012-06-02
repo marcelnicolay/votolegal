@@ -9,6 +9,9 @@ urlpatterns = patterns('',
     # url(r'^voto_legal/', include('voto_legal.foo.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
+    # Logout redirect
+    url(r'^logout$', facebook_logout, name='facebook_logout'),
+
     # Home template
     url(r'^$', home, name='home'),
 
@@ -18,8 +21,10 @@ urlpatterns = patterns('',
     # Login template
     url(r'^logar/?$', login, name='login'),
 
-    url(r'^dashboard/?$', dashboard, name="dashboard"),
-
+    # Politico template
+    # Exemples:
+    # politico/fulano-da-silva
+    # politico/sicrano-soares
     url(r'^politico/(?P<slug>[^/]+)/?$', politico_view, name='single_politico'),
     url(r'^politico/(?P<slug>[^/]+)/seguir/?$', seguir_politico, name='seguir_politico'),
     url(r'^politico/(?P<slug>[^/]+)/esquecer/?$', esquecer_politico, name='esquecer_politico'),
@@ -33,5 +38,5 @@ urlpatterns = patterns('',
     # Facebook
     url(r'^facebook/login$', 'facebook.views.login', name='facebook_login'),
     url(r'^facebook/authentication_callback$', 'facebook.views.callback', name='facebook-callback'),
-    url(r'^logout$', 'django.contrib.auth.views.logout'),
+
 )

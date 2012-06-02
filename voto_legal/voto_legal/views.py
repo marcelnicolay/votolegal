@@ -1,15 +1,19 @@
 import json
 
 from django.db.models import Q
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import logout
 from voto_legal.models import Acompanhamento, Politico, PoliticoCategoriaProjeto, DoadorPolitico
 
 def home(request):
     facebook_profile = None
+    page_render = 'home.html'
     if request.user.is_authenticated():
         facebook_profile = request.user.get_profile().get_facebook_profile()
-    return render(request, 'home.html', {'facebook_profile': facebook_profile})
+        page_render = 'dashboard.html'
+
+    return render(request, page_render, {'facebook_profile': facebook_profile})
 
 
 def register(request):
@@ -18,6 +22,11 @@ def register(request):
 
 def login(request):
     return render(request, 'login.html')
+
+
+def facebook_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/')
 
 
 def politico_view(request, slug):
