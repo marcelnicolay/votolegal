@@ -15,11 +15,11 @@ urlpatterns = patterns('',
     # Home template
     url(r'^$', home, name='home'),
 
-    # Register template
-    url(r'^registrar/?$', register, name='register'),
-
-    # Login template
-    url(r'^logar/?$', login, name='login'),
+    # Perfil de usuario template
+    # Exemples:
+    # perfil/fulano-da-silva
+    # perfil/sicrano-soares
+    url(r'^perfil/(?P<facebook_id>[^/]+)/?$', perfil_view, name='perfil'),
 
     # Politico template
     # Exemples:
