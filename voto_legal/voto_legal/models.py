@@ -122,6 +122,19 @@ class NoticiaPolitico(models.Model):
     politico = models.ForeignKey(Politico)
 
 
+class NoticiaAcesso(models.Model):
+    noticia = models.ForeignKey(Noticia)
+    facebook = models.ForeignKey(fb_models.FacebookProfile)
+    count = models.IntegerField(default=0)
+
+
+class UsuarioExtra(models.Model):
+    user = models.OneToOneField(fb_models.FacebookProfile)
+    uf = models.ForeignKey(UF)
+    cidade = models.ForeignKey(Cidade)
+    data_nascimento = models.DateField()
+
+
 class FacebookProfileManager(object):
     def __init__(self, facebook_profile):
         self.facebook_profile = facebook_profile
