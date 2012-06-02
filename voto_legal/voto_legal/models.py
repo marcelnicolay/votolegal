@@ -1,5 +1,6 @@
 # coding: utf-8
 from django.db import models
+from facebook.models import FacebookProfile
 
 
 class Politico(models.Model):
@@ -103,4 +104,9 @@ class Noticia(models.Model):
 
 class NoticiaPolitico(models.Model):
     noticia = models.ForeignKey(Noticia)
+    politico = models.ForeignKey(Politico)
+
+
+class Acompanhamento(models.Model):
+    usuario = models.ForeignKey(FacebookProfile)
     politico = models.ForeignKey(Politico)
