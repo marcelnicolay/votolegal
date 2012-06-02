@@ -38,8 +38,23 @@
             <h2>You are logged in as: {{ user }}</h2>
             <a href="/logout">Logout</a>
             <h2>User info</h2>
-            <img src="http://graph.facebook.com/{{ user.get_profile.facebook_id }}/picture?type=large" /><br />
+            <img src="{{ facebook_profile.picture }}"><br />
             <pre>{{ facebook_profile|pprint }}</pre>
+        </section>
+    </div>
+    <div class="row-fluid">
+        <section class="span12">
+            <h2>Seus Amigos</h2>
+            {% for friend in my_friends %}
+            <div class="clearfix" style="border-bottom: 1px solid #ccc; padding: 5px;">
+                <a href="{% url perfil friend.fb_id %}">
+                <img src="{{ friend.picture }}" alt="{{ friend.name }}" align="left" height="32">
+                <div style="padding-top:5px;padding-left:60px;">
+                    {{ friend.name }}
+                </div>
+                </a>
+            </div>
+            {% endfor %}
         </section>
     </div>
 </section>

@@ -3,7 +3,7 @@
 <section class='container subhead'>
     <div class='row-fluid'>
         <div class='span2 photowrap'>
-            <img src="http://graph.facebook.com/{{ user.get_profile.facebook_id }}/picture?type=large" />
+            <img src="{{ facebook.picture }}"><br />
         </div>
         <div class='span10'>
             {% if facebook.link %}<a href='{{ facebook.link }}' target='_blank' class='perfil-title'>{% endif %}<h1>{{ facebook.name }}</h1>{% if facebook.link %}</a>{% endif %}

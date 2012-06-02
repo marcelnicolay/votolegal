@@ -1,22 +1,37 @@
 import json
+from datetime import datetime
 
 from django.db.models import Q
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import logout
-from voto_legal.models import Acompanhamento, Politico, PoliticoCategoriaProjeto, DoadorPolitico
 from facebook.models import FacebookProfile
-from datetime import datetime
+
+from voto_legal.models import (Acompanhamento, FacebookProfileManager, Politico,
+    PoliticoCategoriaProjeto, DoadorPolitico)
 
 
 def home(request):
-    facebook_profile = None
-    page_render = 'home.html'
     if request.user.is_authenticated():
-        facebook_profile = request.user.get_profile().get_facebook_profile()
         page_render = 'dashboard.html'
+        facebook_profile = request.user.get_profile()
 
-    return render(request, page_render, {'facebook_profile': facebook_profile})
+        politicos = []
+        for acomp in Acompanhamento.objects.filter(usuario=facebook_profile).all():
+            politico = acomp.politico
+            politicos.append(politico)
+
+        my_friends = FacebookProfileManager(facebook_profile).get_app_friends()
+
+        context = {
+            'politicos_que_sigo': politicos,
+            'my_friends': my_friends,
+        }
+    else:
+        page_render = 'home.html'
+        context = {}
+
+    return render(request, page_render, context)
 
 
 def facebook_logout(request):
@@ -26,7 +41,7 @@ def facebook_logout(request):
 
 def perfil_view(request, facebook_id):
     facebook = get_object_or_404(FacebookProfile, facebook_id=facebook_id)
-    facebookdic = facebook.user.get_profile().get_facebook_profile()
+    facebookdic = facebook.get_facebook_profile()
     if facebookdic.get('birthday', ''):
         t1 = datetime.strptime(facebookdic['birthday'], '%m/%d/%Y')
         t2 = datetime.now()
@@ -34,9 +49,17 @@ def perfil_view(request, facebook_id):
         yearsold = int(float(tdelta.days) / 365.242199)
     else:
         yearsold = ''
+
+    politicos = []
+    for acomp in Acompanhamento.objects.filter(usuario=facebook).all():
+        politico = acomp.politico
+        politicos.append(politico)
+
+
     return render(request, 'perfil.html', {
         "facebook": facebookdic,
-        'yearsold': yearsold
+        'yearsold': yearsold,
+        'politicos_que_sigo': politicos,
     })
 
 
@@ -50,7 +73,7 @@ def politico_view(request, slug):
     acompanhamento = None
     if user:
         acompanhamento = Acompanhamento.objects.filter(usuario=user, politico=politico)
-        
+
     total_relevantes = 0
     total_irrelevantes = 0
 
@@ -90,19 +113,6 @@ def ajax_politicos(request, nome):
         context['politicos'] = None
 
     return HttpResponse(json.dumps(context), mimetype='application/json')
-
-
-def dashboard(request):
-    facebook_profile = request.user.get_profile()
-    politicos = []
-    for acomp in Acompanhamento.objects.filter(usuario=facebook_profile).all():
-        politico = acomp.politico
-        politicos.append(politico)
-    context = {
-        'politicos_que_sigo': politicos,
-    }
-
-    return render(request, 'dashboard.html', context)
 
 
 def seguir_politico(request, slug):
