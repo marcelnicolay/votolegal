@@ -34,6 +34,6 @@ urlpatterns = patterns('',
 
     # Facebook something
     url(r'^facebook/login$', 'facebook.views.login', name='facebook_login'),
-    url(r'^facebook/authentication_callback$', 'facebook.views.authentication_callback'),
+    url(r'^facebook/authentication_callback$', 'facebook.views.callback', name='facebook-callback'),
     url(r'^logout$', 'django.contrib.auth.views.logout'),
 )
