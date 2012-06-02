@@ -4,11 +4,13 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 
+import os
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        "Write your forwards methods here."
-        # Note: Remember to use orm['appname.ModelName'] rather than "from appname.models..."
+        dump_data = open(os.path.join(os.path.dirname(__file__), 'doadores.sql'), 'r')
+        db.execute(dump_data.read())
+        
 
     def backwards(self, orm):
         "Write your backwards methods here."

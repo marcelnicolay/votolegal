@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block footer_scripts %}
+    {{ block.super }}
+    
+    <script type='text/javascript'>
+    yepnope([
+        {
+            load: '{{ STATIC_URL }}voto_legal/js/highcharts.js',
+            complete: function (){
+                (function($) {
+                    $(document).ready(function() {
+                	    chart = new Highcharts.Chart({
+                    		chart: {
+                    			renderTo: 'categorias',
+                    			plotBackgroundColor: null,
+                    			plotBorderWidth: null,
+                    			plotShadow: false,
+                    			backgroundColor: '#eee',
+                    		},
+                    		title: {
+                    			text: 'projetos apresentados até 2012'
+                    		},
+                    		tooltip: {
+                    			formatter: function() {
+                    			    console.log(this)
+                    				return '<b>'+ this.point.name +'</b>: '+ this.y;
+                    			}
+                    		},
+                    		plotOptions: {
+                    			pie: {
+                    				allowPointSelect: true,
+                    				cursor: 'pointer',
+                    				dataLabels: {
+                    					enabled: false,
+                    				},
+                    				showInLegend: true
+                    			}
+                    		},
+                    		series: [{
+                    			type: 'pie',
+                    			name: 'total de projeto',
+                    			data: [
+                    				{% for categoria in categorias %}
+                    				    ["{{categoria.categoria_projeto.nome}}", {{categoria.quantidade|floatformat}}],
+                    				{% endfor %}
+                    			]
+                    		}]
+                    	});
+                    	
+                    	chart2 = new Highcharts.Chart({
+                    		chart: {
+                    			renderTo: 'categorias-relevantes',
+                    			plotBackgroundColor: null,
+                    			plotBorderWidth: null,
+                    			plotShadow: false,
+                    			backgroundColor: '#eee',
+                    			width:500
+                    		},
+                    		title: {
+                    		    text: "Relevantes / Irrelevantes"
+                    		},
+                    		tooltip: {
+                    			formatter: function() {
+                    				return '<b>'+ this.point.name +'</b>: '+ this.y;
+                    			}
+                    		},
+                    		plotOptions: {
+                    			pie: {
+                    				allowPointSelect: true,
+                    				cursor: 'pointer',
+                    				dataLabels: {
+                    					enabled: false,
+                    				},
+                    				showInLegend: true
+                    			}
+                    		},
+                    		series: [{
+                    			type: 'pie',
+                    			name: 'Browser share',
+                    			data: [
+                    				    ["Relevantes", {{total_relevantes}}],
+                    				    ["Irrelevantes", {{total_irrelevantes}}],
+                    			]
+                    		}]
+                    	});
+                    });
+                })(jQuery);
+            }
+        },
+    ]);
+    </script>
+{% endblock %}
+{% block content %}
+	
+    <section class='container'>
+        <div class='row row-fuild'>
+            <section class='span12'>
+                  <header class="jumbotron subhead" id="overview">
+                        <img src='{{politico.imagem}}' align='left' style='margin-right:40px;border:1px solid #666'/>
+                        <h1>{{ politico }}</h1>
+                        <p class="lead">{{ politico.biografia }}</p>
+                  </header>        
+            </section>
+        </div>
+
+        <div class='row'>
+            <section class='span12'>
+                <h2>Produtividade Legislativa</h2>
+            </section>
+            <section class='span6'>
+                <p id='categorias-relevantes'></p>
+            </section>
+            <section class='span6'>
+                <p id='categorias'></p>
+            </section>
+        </div>
+    </section>
+    
+{% endblock %}

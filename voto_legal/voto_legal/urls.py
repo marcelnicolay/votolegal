@@ -20,11 +20,7 @@ urlpatterns = patterns('',
 
     url(r'^dashboard/?', dashboard, name="dashboard"),
 
-    # Politico template
-    # Exemples:
-    # politico/fulano-da-silva
-    # politico/sicrano-soares
-    url(r'^politico/(?P<slug>[^/]+)/?$', single_politico, name='single_politico'),
+    url(r'^politico/(?P<slug>[^/]+)/?$', politico_view, name='single_politico'),
 
     # Politicos archive template
     url(r'^politicos?/?$', archive_politicos, name='archive_politicos'),

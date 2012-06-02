@@ -2,9 +2,8 @@ import json
 
 from django.db.models import Q
 from django.http import HttpResponse
-from django.shortcuts import render
-
-from voto_legal.models import Politico
+from django.shortcuts import render, get_object_or_404
+from voto_legal.models import Politico, PoliticoCategoriaProjeto
 
 
 def home(request):
@@ -19,9 +18,24 @@ def login(request):
     return render(request, 'login.html')
 
 
-def single_politico(request, slug):
-    return render(request, 'single-politico.html', {
-        'politico_slug': slug
+def politico_view(request, slug):
+    politico = get_object_or_404(Politico, slug=slug)
+    categorias = PoliticoCategoriaProjeto.objects.filter(politico=politico)
+    
+    total_relevantes = 0
+    total_irrelevantes = 0
+    
+    for categoria in categorias:
+        if categoria.categoria_projeto.relevante:
+            total_relevantes += categoria.quantidade
+        else:
+            total_irrelevantes += categoria.quantidade
+        
+    return render(request, 'politico.html', {
+        'politico': politico,
+        'categorias': categorias,
+        'total_relevantes': total_relevantes,
+        'total_irrelevantes': total_irrelevantes
     })
 
 
