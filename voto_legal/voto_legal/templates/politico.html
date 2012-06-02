@@ -124,6 +124,7 @@
             <section class='span12'>
                   <header class="jumbotron subhead" id="overview">
                         <img src='{{politico.imagem}}' align='left' style='margin-right:40px;border:1px solid #666'/>
+                        {% if user.is_authenticated %}
                             <div class='actions' style='float:right'>
                             {% if acompanhamento %}
                                 <a class="btn btn-primary btn-danger btn-large" href="#" id="esquecer">Esquecer</a>
@@ -131,6 +132,7 @@
                                 <a class="btn btn-primary btn-success btn-large" href="#" id="acompanhar" >Acompanhar</a>
                             {% endif %}
                             </div>
+                        {% endif %}
                         <h1>
                             {{ politico }}
                         </h1>

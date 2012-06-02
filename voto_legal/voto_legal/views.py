@@ -69,10 +69,10 @@ def politico_view(request, slug):
     doadores = DoadorPolitico.objects.filter(politico=politico).order_by('-valor')[:10]
     noticias = politico.noticias.all()[:20]
     
-    user = request.user.get_profile()
+    user = request.user
     acompanhamento = None
-    if user:
-        acompanhamento = Acompanhamento.objects.filter(usuario=user, politico=politico)
+    if not user.is_anonymous():
+        acompanhamento = Acompanhamento.objects.filter(usuario=user.get_profile(), politico=politico)
 
     total_relevantes = 0
     total_irrelevantes = 0
