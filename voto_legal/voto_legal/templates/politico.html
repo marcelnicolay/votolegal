@@ -159,7 +159,7 @@
                 <h2>Noticias</h2>
                 <ul>
                     {% for noticia in noticias %}
-                        <li><a href='{{noticia.url}}'>{{noticia.titulo}}</a></li>
+                        <li><a href='/ver/{{noticia.id}}' title='{{noticia.titulo}}'>{{noticia.titulo}}</a></li>
                     {% endfor %}
                 </ul>
             </section>
