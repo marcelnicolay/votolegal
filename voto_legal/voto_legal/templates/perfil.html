@@ -22,10 +22,9 @@
 	<div class="row-fluid">
         <section class="span6">
             <h2>Políticos vigiados</h2>
-
             {% for politico in politicos_que_sigo %}
             <div class="clearfix" style="border-bottom: 1px solid #ccc;padding:5px;">
-                <a href="#">
+                <a href="{% url single_politico politico.slug %}">
                 <img src="{{ politico.imagem }}" alt="{{ politico.nome }}" align="left" width="32">
                 <div style="padding-top:5px;padding-left:40px;">
                     {{ politico.apelido }}<br>
@@ -36,10 +35,6 @@
             {% endfor %}
         </section>
         <section class="span6">
-            <h2>You are logged in as: {{ user }}</h2>
-            <a href="/logout">Logout</a>
-            <h2>User info</h2>
-            <br />
             <pre>{{ facebook|pprint }}</pre>
         </section>
     </div>

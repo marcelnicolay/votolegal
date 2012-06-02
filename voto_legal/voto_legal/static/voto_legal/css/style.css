@@ -17,8 +17,17 @@ a.big.btn { text-transform: uppercase; font-family:'exo-extrabold'; padding: 1em
 
 /*====== Search page ======*/
 .search { display: table; margin:0 auto; float:none; }
-.search .field { font-family:'exo-light'; margin: 0 4% 0 0; padding: 0 8px; font-size: 25px; line-height: 52px; height: 52px; width: 76%; }
-.search .send { font-family:'exo-medium'; font-size: 30px; padding: 0; line-height: 52px; height:52px; width: 20%; text-transform: uppercase; }
+.search .field { float:left; font-family:'exo-light'; padding: 0 8px; font-size: 25px; line-height: 52px; height: 52px; }
+.search .send { display: block; font-family:'exo-medium'; font-size: 30px; padding: 0; line-height: 52px; height:52px; text-transform: uppercase; }
+
+.navbar-search { position: relative; margin: 5px 10px; }
+.navbar-search > div { position: relative; }
+.navbar-search .search-query { padding-left: 29px; margin:0; }
+.navbar-search .icon-search { position: absolute; top: 7px; left: 11px; background-image: url("../img/glyphicons-halflings-white.png"); }
+.navbar-search .search-query:focus,
+.navbar-search .search-query.focused { padding-left: 30px; }
+.search-query:focus + .icon-search { background-image: url("../img/glyphicons-halflings.png"); }
+​
 
 .search > *,
 .photowrap,

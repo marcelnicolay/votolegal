@@ -9,9 +9,11 @@
         <section class='span12'>
             <h1 class='big'>Qual o seu candidato?</h1>
             <form class='politico search span6' action="/ajax/candidato/" method="post">
-                <input class='field' type='text' autocomplete="off" placeholder="digite o nome do candidato" />
+            	<div class='row'>
+                <input class='field span5' type='text' autocomplete="off" placeholder="digite o nome do candidato" />
                 <input class='slug' type='hidden' />
-                <a href='#' class='btn btn-primary send'>Ir</a>
+                <a href='#' class='btn btn-primary send span1'>Ir</a>
+            </div>
             </form>
         </section>
     </div>
@@ -20,7 +22,6 @@
 	<div class="row-fluid">
         <section class="span6">
             <h2>Políticos vigiados</h2>
-
             {% for politico in politicos_que_sigo %}
             <div class="clearfix" style="border-bottom: 1px solid #ccc;padding:5px;">
                 <a href="{% url single_politico politico.slug %}">
