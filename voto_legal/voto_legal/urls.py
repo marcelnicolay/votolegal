@@ -33,7 +33,7 @@ urlpatterns = patterns('',
     url(r'^ajax/politicos/(?P<nome>[^/]+)/??$', ajax_politicos, name="ajax_politicos"),
 
     # Facebook something
-    url(r'^facebook/login$', 'facebook.views.login', name='facebook-login'),
+    url(r'^facebook/login$', 'facebook.views.login', name='facebook_login'),
     url(r'^facebook/authentication_callback$', 'facebook.views.authentication_callback'),
     url(r'^logout$', 'django.contrib.auth.views.logout'),
 )
