@@ -1,12 +1,23 @@
 {% extends "base.html" %}
 {% block body_start %}<body class='home'>{% endblock %}
 {% block content %}
-<section class='container pagespot'>
-    <div class='row-fuild'>
-        <section class='span12'>
-            <h1 class='big title'>VotoLegal.org</h1>
-            <a href='{% url facebook_login %}' class='btn btn-primary entrar big'>Entrar</a>
-        </section>
+
+<header class="jumbotron masthead container">
+  <div class="inner">
+    <h1>Votolegal.org</h1>
+    <p>Faça você também um voto legal, um voto consciente. Conheça o histórico dos seus políticos</p>
+
+    <p class="download-info">
+        <a href="{% url facebook_login %}" class="btn btn-primary btn-large">Conhecer meus Políticos</a>
+    </p>
+    <div class='bs-links'>
+        <ul class='quick-links'>
+            <li>
+                <div class="fb-like" data-href="http://votolegal.org" data-send="false" data-width="450" data-show-faces="false" data-font="verdana"></div>
+            </li>
+        </ul>
     </div>
-</section>
+
+  </div>
+</header>
 {% endblock %}
