@@ -1,10 +1,11 @@
-# coding: utf-8
-import os
-
+# -*- coding: utf-8 -*-
+import datetime
 from south.db import db
 from south.v2 import DataMigration
+from django.db import models
 from voto_legal.models import Pais, UF, Cidade
 
+import os
 
 class Migration(DataMigration):
     def forwards(self, orm):
@@ -41,6 +42,12 @@ class Migration(DataMigration):
             'nome': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'relevante': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
         },
+        'voto_legal.cidade': {
+            'Meta': {'object_name': 'Cidade'},
+            'estado': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['voto_legal.UF']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'nome': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+        },
         'voto_legal.doador': {
             'Meta': {'object_name': 'Doador'},
             'cnpj_cpf': ('django.db.models.fields.CharField', [], {'max_length': '14'}),
@@ -65,6 +72,11 @@ class Migration(DataMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'noticia': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['voto_legal.Noticia']"}),
             'politico': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['voto_legal.Politico']"})
+        },
+        'voto_legal.pais': {
+            'Meta': {'object_name': 'Pais'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'nome': ('django.db.models.fields.CharField', [], {'max_length': '150'})
         },
         'voto_legal.partido': {
             'Meta': {'object_name': 'Partido'},
@@ -94,6 +106,7 @@ class Migration(DataMigration):
             'Meta': {'object_name': 'UF'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'nome': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'pais': ('django.db.models.fields.related.ForeignKey', [], {'default': 'None', 'to': "orm['voto_legal.Pais']", 'null': 'True'}),
             'sigla': ('django.db.models.fields.CharField', [], {'max_length': '2'})
         }
     }
