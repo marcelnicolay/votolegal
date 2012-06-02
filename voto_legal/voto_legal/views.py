@@ -3,8 +3,7 @@ import json
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from voto_legal.models import Politico, PoliticoCategoriaProjeto
-
+from voto_legal.models import Politico, PoliticoCategoriaProjeto, DoadorPolitico
 
 def home(request):
     facebook_profile = None
@@ -24,6 +23,8 @@ def login(request):
 def politico_view(request, slug):
     politico = get_object_or_404(Politico, slug=slug)
     categorias = PoliticoCategoriaProjeto.objects.filter(politico=politico)
+    doadores = DoadorPolitico.objects.filter(politico=politico).order_by('-valor')[:10]
+    noticias = politico.noticias.all()[:20]
     
     total_relevantes = 0
     total_irrelevantes = 0
@@ -38,7 +39,9 @@ def politico_view(request, slug):
         'politico': politico,
         'categorias': categorias,
         'total_relevantes': total_relevantes,
-        'total_irrelevantes': total_irrelevantes
+        'total_irrelevantes': total_irrelevantes,
+        'doadores': doadores,
+        'noticias': noticias
     })
 
 

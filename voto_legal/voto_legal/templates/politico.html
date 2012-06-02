@@ -30,7 +30,6 @@
                     		},
                     		tooltip: {
                     			formatter: function() {
-                    			    console.log(this)
                     				return '<b>'+ this.point.name +'</b>: '+ this.y;
                     			}
                     		},
@@ -92,6 +91,11 @@
                     		}]
                     	});
                     });
+                    
+                    $("#acompanhar").unbind().bind('click', function(e){
+                       e.preventDefault();
+                       $.get('/{{politico.slug}}')
+                    });
                 })(jQuery);
             }
         },
@@ -99,12 +103,14 @@
     </script>
 {% endblock %}
 {% block content %}
-	
+	{% load money %}
     <section class='container'>
         <div class='row row-fuild'>
             <section class='span12'>
                   <header class="jumbotron subhead" id="overview">
                         <img src='{{politico.imagem}}' align='left' style='margin-right:40px;border:1px solid #666'/>
+                        
+                          <a class="btn btn-primary btn-success btn-large" href="#" id="acompanhar" style='float:right'>Acompanhar</a>
                         <h1>
                             {{ politico }}
                         </h1>
@@ -125,6 +131,40 @@
             </section>
             <section class='span6'>
                 <p id='categorias'></p>
+            </section>
+        </div>
+        
+        <div class='row'>
+            <section class='span6'>
+                <h2>Noticias</h2>
+                <ul>
+                    {% for noticia in noticias %}
+                        <li><a href='{{noticia.url}}'>{{noticia.titulo}}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+            <section class='span6'>
+                <h2>Principais doadores da campanha</h2>
+                <p>
+                <table class='table table-bordered table-striped'>
+                  <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th>CNPJ / CPF</th>
+                      <th>Valor</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% for doador in doadores %}
+                          <tr>
+                            <td>{{doador.doador.nome}}</td>
+                            <td>{{ doador.doador.cnpj_cpf }}</td>
+                            <td>{{ doador.valor|money }}</td>
+                          </tr>
+                      {% endfor %}
+                  </tbody>
+                </table>
+                </p>
             </section>
         </div>
     </section>
