@@ -86,6 +86,11 @@
                                 return;
                             }
                         }).trigger('focus');
+                    }).on({
+                        submit: function (e){
+                            e.preventDefault();
+                            return;
+                        }
                     });
                 }
             };
