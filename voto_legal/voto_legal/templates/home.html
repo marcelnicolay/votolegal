@@ -4,8 +4,11 @@
 <section class='container'>
     <div class='row-fuild'>
         <section class='span12'>
-            <h1 class='entrar'>VoteLegal.org</h1>
-            <a class='btn btn-primary entrar' href='#'>Entrar</a>
+            <h1 class='entrar'>VotoLegal.org</h1>
+            <form class='facebook-connect' action="{% url facebook_connect %}?facebook_login=1" method="post">
+                <a href='#' class='btn btn-primary entrar'>Entrar</a>
+                <input type="hidden" value="{{ request.path }}" name="next" />
+            </form>
         </section>
     </div>
 </section>
