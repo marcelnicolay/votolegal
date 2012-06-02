@@ -10,23 +10,22 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # Home template
-    url(r'^$', home),
+    url(r'^$', home, name='home'),
 
     # Register template
-    url(r'^registrar/?$', register),
+    url(r'^registrar/?$', register, name='register'),
 
     # Login template
-    url(r'^logar/?$', login),
+    url(r'^logar/?$', login, name='login'),
 
     # Politico template
     # Exemples:
     # politico/fulano-da-silva
     # politico/sicrano-soares
-    url(r'^politico/(?P<slug>[^/]+)/?$', single_politico),
+    url(r'^politico/(?P<slug>[^/]+)/?$', single_politico, name='single_politico'),
 
     # Politicos archive template
-    url(r'^politico/?$', archive_politicos),
-    url(r'^politicos/?$', archive_politicos),
+    url(r'^politicos?/?$', archive_politicos, name='archive_politicos'),
 
     # Facebook something
     url(r'^fb/', include('django_facebook.urls')),
