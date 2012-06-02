@@ -1,6 +1,9 @@
 # coding: utf-8
+import json
+import urllib
+
 from django.db import models
-from facebook.models import FacebookProfile
+from facebook import models as fb_models
 
 
 class Politico(models.Model):
@@ -115,6 +118,41 @@ class NoticiaPolitico(models.Model):
     politico = models.ForeignKey(Politico)
 
 
+class FacebookProfileManager(object):
+    def __init__(self, facebook_profile):
+        self.facebook_profile = facebook_profile
+
+    def get_app_friends(self):
+        obj = self.facebook_profile
+        my_friends_ids = []
+
+        url = "https://graph.facebook.com/{fb_id}/friends?access_token={token}".format(fb_id=obj.facebook_id, token=obj.access_token)
+        url_data = urllib.urlopen(url).read()
+        friends_list = json.loads(url_data)
+        for friend in friends_list.get('data', []):
+            my_friends_ids.append(int(friend['id']))
+
+        # TODO: pegar outras paginas
+        #while friends_list.get('paging', dict()).get('next'):
+        #    next_page = friends_list.get('paging', dict()).get('next')
+        #    url_data = urllib.urlopen(url).read()
+        #    friends_list = json.loads(url_data)
+        #    for friend in friends_list.get('data', []):
+        #        my_friends_ids.append(int(friend['id']))
+
+
+        my_friends = fb_models.FacebookProfile.objects.filter(facebook_id__in=my_friends_ids)
+        response = []
+        for friend in my_friends.all():
+            data = friend.get_facebook_profile()
+            response.append({
+                'name': data['name'],
+                'username': data['username'],
+                'picture': data['picture'],
+            })
+        return response
+
+
 class Acompanhamento(models.Model):
-    usuario = models.ForeignKey(FacebookProfile)
+    usuario = models.ForeignKey(fb_models.FacebookProfile)
     politico = models.ForeignKey(Politico)
