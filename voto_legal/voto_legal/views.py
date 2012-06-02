@@ -21,7 +21,8 @@ def home(request):
             politico = acomp.politico
             politicos.append(politico)
 
-        my_friends = FacebookProfileManager(facebook_profile).get_app_friends()
+        fb_profile_manager = FacebookProfileManager(facebook_profile)
+        my_friends = fb_profile_manager.get_app_friends()
 
         context = {
             'politicos_que_sigo': politicos,
