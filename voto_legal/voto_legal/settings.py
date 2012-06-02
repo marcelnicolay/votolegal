@@ -180,3 +180,7 @@ AUTHENTICATION_BACKENDS = (
 AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'
 
 FACEBOOK_REGISTRATION_BACKEND = 'django_facebook.registration_backends.UserenaBackend'
+
+FACEBOOK_DEFAULT_SCOPE = ['email', 'user_about_me', 'user_birthday', 'publish_stream', 'publish_actions', 'offline_access']
+
+FACEBOOK_STORE_ALL_ACCESS_TOKENS = True
