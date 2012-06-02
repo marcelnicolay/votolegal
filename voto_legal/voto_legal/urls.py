@@ -21,6 +21,8 @@ urlpatterns = patterns('',
     # perfil/sicrano-soares
     url(r'^perfil/(?P<facebook_id>[^/]+)/?$', perfil_view, name='perfil'),
 
+    url(r'^usuario/estado?$', usuario_estado, name='usuario_estado'),
+    
     # Politico template
     # Exemples:
     # politico/fulano-da-silva

@@ -113,3 +113,18 @@ overflow: hidden;
   font-size: 30px;
   line-height: 36px;
 }
+
+
+.politicos-estado{list-style:none;margin:0 0 0 -10px;padding:0;}
+.politicos-estado li{float:left;}
+.politicos-estado li a{display:block; margin:10px; border:1px solid #ccc;overflow:hidden;height:59px; -webkit-border-radius: 3px; /* Saf3-4, iOS 1-3.2, Android ≤1.6 */
+          border-radius: 3px; /* Opera 10.5, IE9, Saf5, Chrome, FF4+, iOS 4, Android 2.1+ */
+  /* useful if you don't want a bg color from leaking outside the border: */
+  -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+
+  -webkit-box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.2);
+          box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.2);
+
+}
+.politicos-estado li a:hover{border:1px solid #999;}
+.politicos-estado li a img{width:59px; margin-top:-16%;}

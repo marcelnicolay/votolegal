@@ -36,7 +36,13 @@ class Politico(models.Model):
     @property
     def politicos_relacionados(self):
         return Politico.objects.filter(partido=self.partido, uf=self.uf).exclude(id=self.id)[:10]
-
+    
+    def as_dict(self):
+        return {
+            'slug': self.slug,
+            'imagem': self.imagem,
+            'apelido': "%s (%s-%s)" % (self.apelido, self.partido.sigla, self.uf.sigla)
+        }
 
 class Partido(models.Model):
     nome = models.CharField(max_length=100)
@@ -136,9 +142,13 @@ class NoticiaAcesso(models.Model):
 
 class UsuarioExtra(models.Model):
     user = models.OneToOneField(fb_models.FacebookProfile)
-    uf = models.ForeignKey(UF)
-    cidade = models.ForeignKey(Cidade)
-    data_nascimento = models.DateField()
+    uf = models.ForeignKey(UF, default=None, null=True)
+    cidade = models.ForeignKey(Cidade, default=None, null=True)
+    data_nascimento = models.DateField(default=None, null=True)
+    
+    @property
+    def politico_same_uf(self):
+        return Politico.objects.filter(uf=self.uf)[:12]
 
 
 class FacebookProfileManager(object):

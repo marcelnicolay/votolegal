@@ -8,7 +8,7 @@ from django.contrib.auth import logout
 from facebook.models import FacebookProfile
 
 from voto_legal.models import (Acompanhamento, FacebookProfileManager, Politico,
-    PoliticoCategoriaProjeto, DoadorPolitico, NoticiaAcesso, Noticia)
+    PoliticoCategoriaProjeto, DoadorPolitico, NoticiaAcesso, Noticia, UF, UsuarioExtra)
 
 
 def home(request):
@@ -16,6 +16,11 @@ def home(request):
         page_render = 'dashboard.html'
         facebook_profile = request.user.get_profile()
 
+        try:
+            usuario_dados = UsuarioExtra.objects.get(user=facebook_profile)
+        except UsuarioExtra.DoesNotExist:
+            usuario_dados = None
+        
         politicos = []
         for acomp in Acompanhamento.objects.filter(usuario=facebook_profile).all():
             politico = acomp.politico
@@ -27,6 +32,8 @@ def home(request):
         context = {
             'politicos_que_sigo': politicos,
             'my_friends': my_friends,
+            'usuario_dados': usuario_dados,
+            'estados': UF.objects.all()
         }
     else:
         page_render = 'home.html'
@@ -139,6 +146,20 @@ def seguir_politico(request, slug):
 
     return HttpResponse(json.dumps(context), mimetype='application/json')
 
+def usuario_estado(request):
+
+    facebook_profile = request.user.get_profile()
+    estado = UF.objects.get(id=request.GET.get('estado'))
+    
+    usuario_extra, _ = UsuarioExtra.objects.get_or_create(user = facebook_profile)
+    usuario_extra.uf = estado
+    usuario_extra.save()
+    
+    context = {
+        'politicos': [p.as_dict() for p in usuario_extra.politico_same_uf]
+    }
+
+    return HttpResponse(json.dumps(context), mimetype='application/json')
 
 def esquecer_politico(request, slug):
     try:
