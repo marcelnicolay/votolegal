@@ -38,6 +38,7 @@
     <div class="row-fluid">
         <section class="span12">
             <h2>Seus Amigos</h2>
+            {% if my_friends %}
             {% for friend in my_friends %}
             <div class="clearfix" style="border-bottom: 1px solid #ccc; padding: 5px;">
                 <a href="{% url perfil friend.fb_id %}">
@@ -48,6 +49,9 @@
                 </a>
             </div>
             {% endfor %}
+            {% else %}
+            <h4>nenhum dos seus amigos vota legal... =(</h4>
+            {% endif %}
         </section>
     </div>
 </section>
