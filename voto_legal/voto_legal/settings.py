@@ -120,11 +120,11 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
     'south',
     'userena',
     'django_facebook',
     'voto_legal',
+    'django.contrib.admin',
 )
 
 # A sample logging configuration. The only tangible logging
