@@ -124,6 +124,13 @@ class NoticiaAcesso(models.Model):
     count = models.IntegerField(default=0)
 
 
+class UsuarioExtra(models.Model):
+    user = models.OneToOneField(fb_models.FacebookProfile)
+    uf = models.ForeignKey(UF)
+    cidade = models.ForeignKey(Cidade)
+    data_nascimento = models.DateField()
+
+
 class FacebookProfileManager(object):
     def __init__(self, facebook_profile):
         self.facebook_profile = facebook_profile

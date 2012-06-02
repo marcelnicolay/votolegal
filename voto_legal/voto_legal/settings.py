@@ -158,7 +158,7 @@ LOGGING = {
 # Facebook Settings
 FACEBOOK_APP_ID = "108604439280662"
 FACEBOOK_APP_SECRET = "c580582be02ebed790ea93c17c454a3b"
-FACEBOOK_SCOPE = 'publish_stream, email'
+FACEBOOK_SCOPE = 'user_birthday, publish_stream, email'
 LOGIN_REDIRECT_URL = '/'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
