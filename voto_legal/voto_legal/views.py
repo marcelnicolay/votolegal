@@ -1,9 +1,9 @@
 import json
 
 from django.db.models import Q
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404
-from voto_legal.models import Politico, PoliticoCategoriaProjeto, DoadorPolitico
+from voto_legal.models import Acompanhamento, Politico, PoliticoCategoriaProjeto, DoadorPolitico
 
 def home(request):
     facebook_profile = None
@@ -25,16 +25,16 @@ def politico_view(request, slug):
     categorias = PoliticoCategoriaProjeto.objects.filter(politico=politico)
     doadores = DoadorPolitico.objects.filter(politico=politico).order_by('-valor')[:10]
     noticias = politico.noticias.all()[:20]
-    
+
     total_relevantes = 0
     total_irrelevantes = 0
-    
+
     for categoria in categorias:
         if categoria.categoria_projeto.relevante:
             total_relevantes += categoria.quantidade
         else:
             total_irrelevantes += categoria.quantidade
-        
+
     return render(request, 'politico.html', {
         'politico': politico,
         'categorias': categorias,
@@ -67,5 +67,48 @@ def ajax_politicos(request, nome):
 
 
 def dashboard(request):
-    context = {}
+    facebook_profile = request.user.get_profile()
+    politicos = []
+    for acomp in Acompanhamento.objects.filter(usuario=facebook_profile).all():
+        politico = acomp.politico
+        politicos.append(politico)
+    context = {
+        'politicos_que_sigo': politicos,
+    }
+
     return render(request, 'dashboard.html', context)
+
+
+def seguir_politico(request, slug):
+    try:
+        politico = Politico.objects.get(slug=slug)
+    except Politico.DoesNotExist:
+        raise Http404
+
+    facebook_profile = request.user.get_profile()
+    politico.seguir(facebook_profile)
+    context = {
+        'status': 'ok',
+    }
+
+    return HttpResponse(json.dumps(context), mimetype='application/json')
+
+
+def politicos_que_sigo(request):
+    if not request.user.is_authenticated():
+        raise Http404
+
+    facebook_profile = request.user.get_profile().get_facebook_profile()
+    politicos = []
+    for acomp in Acompanhamento.objects.filter(user=facebook_profile).all():
+        politico = acomp.politico
+        politicos.append({
+            'nome': politico.nome,
+            'slug': politico.slug,
+        })
+
+    context = {
+        'politicos': politicos,
+    }
+
+    return HttpResponse(json.dumps(context), mimetype='application/json')

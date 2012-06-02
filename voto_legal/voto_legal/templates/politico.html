@@ -94,7 +94,9 @@
                     
                     $("#acompanhar").unbind().bind('click', function(e){
                        e.preventDefault();
-                       $.get('/{{politico.slug}}')
+                       $.get('./seguir', function(response){
+                           console.log(">>>", seguindo)
+                       });
                     });
                 })(jQuery);
             }
