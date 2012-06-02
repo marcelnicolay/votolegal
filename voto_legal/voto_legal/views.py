@@ -7,7 +7,10 @@ from voto_legal.models import Politico, PoliticoCategoriaProjeto
 
 
 def home(request):
-    return render(request, 'home.html')
+    facebook_profile = None
+    if request.user.is_authenticated():
+        facebook_profile = request.user.get_profile().get_facebook_profile()
+    return render(request, 'home.html', {'facebook_profile': facebook_profile})
 
 
 def register(request):
@@ -43,8 +46,7 @@ def archive_politicos(request):
     return render(request, 'archive-politico.html')
 
 
-def search_politico(request):
-    nome = request.GET.get('q', '')
+def ajax_politicos(request, nome):
     politicos = (Politico.objects.filter(Q(apelido__icontains=nome) | Q(nome__icontains=nome))
             .order_by('apelido', 'nome')[:20])
     context = {}

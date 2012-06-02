@@ -2,7 +2,7 @@
 body { background: url('../img/background.png') transparent repeat center center;}
 
 /*====== Home Page ======*/
-.home h1.entrar { text-transform: uppercase; font-family:'exo-medium'; font-size:4.5em; line-height: 1.5em; text-align:center; margin: 1em 0; letter-spacing: -1px; }
+h1.big { text-transform: uppercase; font-family:'exo-medium'; font-size:4.5em; line-height: 1.5em; text-align:center; margin: 1em 0; letter-spacing: -1px; }
 .home a.entrar { text-transform: uppercase; font-family:'exo-extrabold'; padding: 1em 7em; font-size: 2.4em; margin: 0 auto; display: table; }
 
 /*====== ___ ======*/

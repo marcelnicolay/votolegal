@@ -1,15 +1,21 @@
 {% extends "base.html" %}
+
 {% block body_start %}<body class='home'>{% endblock %}
+
 {% block content %}
 <section class='container'>
     <div class='row-fuild'>
         <section class='span12'>
-            <h1 class='entrar'>VotoLegal.org</h1>
-            <form class='facebook-connect' action="{% url facebook_connect %}?facebook_login=1" method="post">
-                <a href='#' class='btn btn-primary entrar'>Entrar</a>
-                <input type="hidden" value="{{ request.path }}" name="next" />
-                <input type="hidden" value="/dashboard" name="redirect" />
-            </form>
+            <h1 class='big'>VotoLegal.org</h1>
+            {% if user.is_authenticated %}
+            <h2>You are logged in as: {{ user }}</h2>
+            <a href="/logout">Logout</a>
+            <h2>User info</h2>
+            <img src="http://graph.facebook.com/{{ user.get_profile.facebook_id }}/picture" /><br />
+            <pre>{{ facebook_profile|pprint }}</pre>
+            {% else %}
+            <a href='{% url facebook_login %}' class='btn btn-primary entrar'>Entrar</a>
+            {% endif %}
         </section>
     </div>
 </section>

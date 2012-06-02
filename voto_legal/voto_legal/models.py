@@ -1,5 +1,6 @@
 # coding: utf-8
 from django.db import models
+from facebook.models import FacebookProfile
 
 
 class Politico(models.Model):
@@ -18,8 +19,6 @@ class Politico(models.Model):
     casa_governamental = models.ForeignKey('CasaGovernamental', null=True, default=None)
     id_transparencia = models.IntegerField()
 
-    doadores = models.ManyToManyField('Doador', through='DoadorPolitico')
-    
     def __unicode__(self):
         return "%s (%s-%s)" % (self.apelido, self.partido.sigla, self.uf.sigla)
 
@@ -105,4 +104,9 @@ class Noticia(models.Model):
 
 class NoticiaPolitico(models.Model):
     noticia = models.ForeignKey(Noticia)
+    politico = models.ForeignKey(Politico)
+
+
+class Acompanhamento(models.Model):
+    usuario = models.ForeignKey(FacebookProfile)
     politico = models.ForeignKey(Politico)

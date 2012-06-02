@@ -121,10 +121,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'south',
-    'userena',
-    'django_facebook',
-    'voto_legal',
     'django.contrib.admin',
+    'facebook',
+    'voto_legal',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -156,14 +155,13 @@ LOGGING = {
     }
 }
 
-# Facebook Connection Settings
-# https://github.com/tschellenbach/Django-facebook
+# Facebook Settings
 FACEBOOK_APP_ID = "108604439280662"
-
 FACEBOOK_APP_SECRET = "c580582be02ebed790ea93c17c454a3b"
+FACEBOOK_SCOPE = 'publish_stream'
+LOGIN_REDIRECT_URL = '/dashboard'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django_facebook.context_processors.facebook',
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
@@ -174,17 +172,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 AUTHENTICATION_BACKENDS = (
-    'django_facebook.auth_backends.FacebookBackend',
+    'facebook.backend.FacebookBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
-AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'
-
-FACEBOOK_REGISTRATION_BACKEND = 'django_facebook.registration_backends.UserenaBackend'
-
-FACEBOOK_DEFAULT_SCOPE = ['email', 'user_about_me', 'user_birthday', 'publish_stream', 'publish_actions', 'offline_access']
-
-FACEBOOK_STORE_ALL_ACCESS_TOKENS = True
-
-# django-guardian requires an anonymous user
-ANONYMOUS_USER_ID = -1
+AUTH_PROFILE_MODULE = 'facebook.FacebookProfile'
