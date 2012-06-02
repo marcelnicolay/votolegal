@@ -41,7 +41,7 @@ def facebook_logout(request):
 
 def perfil_view(request, facebook_id):
     facebook = get_object_or_404(FacebookProfile, facebook_id=facebook_id)
-    facebookdic = facebook.user.get_profile().get_facebook_profile()
+    facebookdic = facebook.get_facebook_profile()
     if facebookdic.get('birthday', ''):
         t1 = datetime.strptime(facebookdic['birthday'], '%m/%d/%Y')
         t2 = datetime.now()
@@ -49,9 +49,17 @@ def perfil_view(request, facebook_id):
         yearsold = int(float(tdelta.days) / 365.242199)
     else:
         yearsold = ''
+
+    politicos = []
+    for acomp in Acompanhamento.objects.filter(usuario=facebook).all():
+        politico = acomp.politico
+        politicos.append(politico)
+
+
     return render(request, 'perfil.html', {
         "facebook": facebookdic,
-        'yearsold': yearsold
+        'yearsold': yearsold,
+        'politicos_que_sigo': politicos,
     })
 
 

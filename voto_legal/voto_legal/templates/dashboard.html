@@ -1,17 +1,15 @@
 {% extends "base.html" %}
-{% block head_css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}voto_legal/js/ui-lightness/jquery-ui-1.8.20.custom.css">
-{% endblock %}
 {% block content %}
 <section class='container pagespot'>
     <div class='row-fuild'>
         <section class='span12'>
             <h1 class='big'>Qual o seu candidato?</h1>
             <form class='politico search span6' action="/ajax/candidato/" method="post">
-                <input class='field' type='text' autocomplete="off" placeholder="digite o nome do candidato" />
+            	<div class='row'>
+                <input class='field span5' type='text' autocomplete="off" placeholder="digite o nome do candidato" />
                 <input class='slug' type='hidden' />
-                <a href='#' class='btn btn-primary send'>Ir</a>
+                <a href='#' class='btn btn-primary send span1'>Ir</a>
+            </div>
             </form>
         </section>
     </div>
@@ -20,7 +18,6 @@
 	<div class="row-fluid">
         <section class="span6">
             <h2>Políticos vigiados</h2>
-
             {% for politico in politicos_que_sigo %}
             <div class="clearfix" style="border-bottom: 1px solid #ccc;padding:5px;">
                 <a href="{% url single_politico politico.slug %}">
@@ -37,7 +34,7 @@
             <h2>You are logged in as: {{ user }}</h2>
             <a href="/logout">Logout</a>
             <h2>User info</h2>
-            <img src="http://graph.facebook.com/{{ user.get_profile.facebook_id }}/picture?type=large" /><br />
+            <img src="{{ facebook_profile.picture }}"><br />
             <pre>{{ facebook_profile|pprint }}</pre>
         </section>
     </div>
@@ -46,7 +43,7 @@
             <h2>Seus Amigos</h2>
             {% for friend in my_friends %}
             <div class="clearfix" style="border-bottom: 1px solid #ccc; padding: 5px;">
-                <a href="#">
+                <a href="{% url perfil friend.fb_id %}">
                 <img src="{{ friend.picture }}" alt="{{ friend.name }}" align="left" height="32">
                 <div style="padding-top:5px;padding-left:60px;">
                     {{ friend.name }}

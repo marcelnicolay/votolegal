@@ -47,7 +47,7 @@
             },
             search = {
                 $: {
-                    forms: $('form.search')
+                    forms: $('form.search,.api-search-form')
                 },
                 ajaxurl: function (term){
                     return ['/ajax/politicos/', term].join('');
@@ -63,9 +63,9 @@
                 init: function (){
                     this.$.forms.each(function (e){
                         var $form = $(this),
-                            $send = $form.find('.send'),
-                            $input = $form.find('.field');
-                            $slug = $form.find('.slug'),
+                            $send = $form.find('.send,.api-search-send'),
+                            $input = $form.find('.field,.api-search-field');
+                            $slug = $form.find('.slug,.api-search-slug'),
                             change = function(e, ui) {
                                 e.preventDefault();
                                 $slug.val(ui.item.value);
