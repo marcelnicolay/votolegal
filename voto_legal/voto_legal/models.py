@@ -180,8 +180,8 @@ class FacebookProfileManager(object):
             response.append({
                 'fb_id': data['id'],
                 'name': data['name'],
-                'username': data['username'],
-                'picture': data['picture'],
+                'username': data.get('username'),
+                'picture': data.get('picture'),
             })
         return response
 
