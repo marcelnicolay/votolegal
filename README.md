@@ -41,7 +41,7 @@ Montar uma base de conhecimento que forneça, de maneira fácil, insumo para o
 
 -------------
 
-# [http://votolegal.org](VotoLegal)
+# [VotoLegal](http://votolegal.org)
 
 O VotoLegal é uma ferramenta digital que aproxima os eleitores de seus cadidatos amados ou odiados. Essa ferramenta varre a internet atrás das mais variadas fontes de dados e atrávez de técnicas de mineiração de dados as consolida em grandes tópicos relevantes para toda a comunidade.
 
