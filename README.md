@@ -1,32 +1,56 @@
-## Voto Legal
+## Politico
 
-### Histórias
-* Importar Base de Políticos, Partidos e Casas `@marcelnicolay`
-* Importar dados de produção legislativa do Transparência Brasil `@rcmachado`
-* Indexar notícias do G1 sobre políticos
-* Importar e veicular dados sobre doação
-* Facebook Connect na home `@webord`
-* Busca por candidato na Dashboard
-* Perfil básico do Candidato
-* Like/Unlike do candidato
-* Acompanhar candidato
-* Produção Legislativa no perfil do candidato
-* Dados sobre doação no perfil do usuário
-* Notícias Relacionadas no usuário
-* Políticos relacionados
-* Dashboard candidato/acompanhando
-* Dashboard Amigos
-* Dashboard candidatos sugeridos por estado
-* Perfil
-* Perfil candidato que eu acompanho
-* Perfil Noticias lidas
-* Badges (relevante, irrelevante, tribunal de contas)
+Um poliítico é um indivíduo ativo na política de um grupo social. Pode ser formalmente reconhecido como membro ativo de um governo, ou uma pessoa que influencia a maneira como a sociedade é governada por meio de conhecimentos sobre poder político e dinâmica de grupo. Essa definição inclui pessoas que estão em cargos de decisão no governo, e pessoas que almejam esses cargos tanto por eleições, quanto por indicação, fraude eleitoral, hereditariedade, etc.
 
-### Fotos
+### Cargos Politícos
 
-<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/img/inicial-planning.jpg' width='200' />
-<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/img/template-homepage.jpg' width='200' />
-<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/img/template-candidato.jpg' width='200' />
-<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/img/template-perfil.jpg' width='200' />
+* Governador
+* Deputado
+* Senador
+* Ministro
+* Prefeito
+* Presidente
+* Vereador
+
+## Problema?
+
+As informações sobre os políticos são totalmente descentralizadas, gerando um distanciamento da população, que não consegue fiscalizar, ou se informar sobre a vida política de um determinado candidato.
+
+## Solução
+
+Montar uma base de conhecimento que forneça, de maneira fácil, insumo para os eleitores poderem escolher e acompanhar e compartilhar seus candidatos
+
+## Quais dados?
+
+* Biografia
+* Notícias
+* Doadores
+* Produtividade Legislativa
+* Assiduidade
+
+## Dados de onde?
+
+* ONG Transparência Brasil
+* Deu no jornal
+* à Claras
+* Excelências
+* Sites da câmara e senado
+* Sites de notícia
+
+# VotoLegal
+
+O VotoLegal é uma ferramenta digital que aproxima os eleitores de seus cadidatos amados ou odiados. Essa ferramenta varre a internet atrás das mais variadas fontes de dados e atrávez de técnicas de mineiração de dados as consolida em grandes tópicos relevantes para toda a comunidade.
+
+O VotoLegal é um projeto SEM FINS LUCRATIVOS, seu único objetivo é municiar a população brasileira de informação.
+
+“Tente mover o mundo - o primeiro passo será mover a si mesmo.” - Platão
+
+## Draft inicial
+
+<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/telas/inicial-planning.jpg' width='200' />
+<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/telas/template-homepage.jpg' width='200' />
+<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/telas/template-candidato.jpg' width='200' />
+<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/telas/template-perfil.jpg' width='200' />
 <div style='clear:both;'></div>
-<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/img/template-dashboard.jpg' width='200' />
+<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/telas/template-dashboard.jpg' width='200' /
+<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/telas/PaginaPolitico_VotoLegal_20120905_V2.jpg' width='200' />
