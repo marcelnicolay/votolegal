@@ -47,10 +47,10 @@ O VotoLegal é um projeto SEM FINS LUCRATIVOS, seu único objetivo é municiar a
 
 ## Draft inicial
 
-<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/telas/inicial-planning.jpg' width='200' />
-<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/telas/template-homepage.jpg' width='200' />
-<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/telas/template-candidato.jpg' width='200' />
-<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/telas/template-perfil.jpg' width='200' />
+<img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/inicial-planning.jpg' width='200' />
+<img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/template-homepage.jpg' width='200' />
+<img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/template-candidato.jpg' width='200' />
+<img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/template-perfil.jpg' width='200' />
 <div style='clear:both;'></div>
-<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/telas/template-dashboard.jpg' width='200' /
-<img style='margin: 0 5px;' src='https://github.com/rcmachado/votolegal/raw/master/telas/PaginaPolitico_VotoLegal_20120905_V2.jpg' width='200' />
+<img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/template-dashboard.jpg' width='200' /
+<img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/PaginaPolitico_VotoLegal_20120905_V2.jpg' width='200' />
