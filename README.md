@@ -53,6 +53,7 @@ Este é um projeto de código livre e aberto, mantido, exclusivamente, pela comu
 
 ## Telas
 
-<img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/camisa_feminina.jpg' width='200' />
 <img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/PaginaPolitico_VotoLegal_20120905_V2.jpg' width='200' />
+<img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/camisa_feminina.jpg' width='200' />
+
 <img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/Home_VotoLegal_20120905_V2.jpg' width='200' />
