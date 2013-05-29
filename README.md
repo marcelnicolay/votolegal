@@ -41,19 +41,21 @@ Montar uma base de conhecimento que forneça, de maneira fácil, insumo para o
 
 -------------
 
-# VotoLegal
+# [http://votolegal.org](VotoLegal)
 
 O VotoLegal é uma ferramenta digital que aproxima os eleitores de seus cadidatos amados ou odiados. Essa ferramenta varre a internet atrás das mais variadas fontes de dados e atrávez de técnicas de mineiração de dados as consolida em grandes tópicos relevantes para toda a comunidade.
 
 O VotoLegal é um projeto **SEM FINS LUCRATIVOS**, seu único objetivo é municiar a população brasileira de informação.
-
-[http://votolegal.org](http://votolegal.org)
 
 > “Tente mover o mundo - o primeiro passo será mover a si mesmo.” - Platão
 
 ## Hackeando com a gente
 
 Este é um projeto de código livre e aberto, mantido, exclusivamente, pela comunidade de desenvolvedores. Para colaborar entre na nossa lista de discussão: **votolegal@googlegroups.com**
+
+## Ambiente local
+
+
 
 ## Telas
 
