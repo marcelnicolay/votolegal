@@ -47,12 +47,12 @@ O VotoLegal é um projeto SEM FINS LUCRATIVOS, seu único objetivo é municiar a
 
 “Tente mover o mundo - o primeiro passo será mover a si mesmo.” - Platão
 
-## Draft inicial
+# Hackeando com a gente
 
-<img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/inicial-planning.jpg' width='200' />
-<img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/template-homepage.jpg' width='200' />
-<img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/template-candidato.jpg' width='200' />
-<img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/template-perfil.jpg' width='200' />
-<div style='clear:both;'></div>
-<img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/template-dashboard.jpg' width='200' />
+Este é um projeto de código livre e aberto, mantido, exclusivamente, pela comunidade de desenvolvedores. Para colaborar entre na nossa lista de discussão: [b](votolegal@googlegroups.com)
+
+## Telas
+
+<img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/camisa_feminina.jpg' width='200' />
 <img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/PaginaPolitico_VotoLegal_20120905_V2.jpg' width='200' />
+<img style='margin: 0 5px;' src='https://github.com/marcelnicolay/votolegal/raw/master/telas/Home_VotoLegal_20120905_V2.jpg' width='200' />
