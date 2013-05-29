@@ -7,10 +7,12 @@ from voto_legal.models import Pais, UF, Cidade
 
 import os
 
+
 class Migration(DataMigration):
+
     def forwards(self, orm):
-        dump_data = open(os.path.join(os.path.dirname(__file__), 'municipios.sql'), 'r')
-        db.execute(dump_data.read())
+        path = lambda p: os.path.join(os.path.dirname(__file__), p)
+        db.execute(open(path('municipios.sql')).read().decode('utf-8'))
 
     def backwards(self, orm):
         brasil = Pais.objects.get(nome='Brasil')

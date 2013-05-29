@@ -55,7 +55,14 @@ Este é um projeto de código livre e aberto, mantido, exclusivamente, pela comu
 
 ## Ambiente local
 
+```bash
+mkvirtualenv votolegal
+pip install -r requirements.txt
 
+make db
+make start
+
+```
 
 ## Telas
 

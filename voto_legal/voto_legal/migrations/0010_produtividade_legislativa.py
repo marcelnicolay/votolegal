@@ -8,10 +8,8 @@ from south.v2 import DataMigration
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        "Write your forwards methods here."
-        # Note: Remember to use orm['appname.ModelName'] rather than "from appname.models..."
-        dump_data = open(os.path.join(os.path.dirname(__file__), 'atividade_legislativa.sql'), 'r')
-        db.execute(dump_data.read())
+        path = lambda p: os.path.join(os.path.dirname(__file__), p)
+        db.execute(open(path('atividade_legislativa.sql')).read().decode('utf-8'))
 
     def backwards(self, orm):
         "Write your backwards methods here."

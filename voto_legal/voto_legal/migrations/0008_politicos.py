@@ -9,8 +9,8 @@ import os
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        dump_data = open(os.path.join(os.path.dirname(__file__), 'politicos.sql'), 'r')
-        db.execute(dump_data.read())
+        path = lambda p: os.path.join(os.path.dirname(__file__), p)
+        db.execute(open(path('politicos.sql')).read().decode('utf-8'))
 
     def backwards(self, orm):
         "Write your backwards methods here."
