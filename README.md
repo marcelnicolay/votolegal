@@ -1,8 +1,10 @@
-## Politico
+# Backgroud
+
+## O que é um Político?
 
 Um poliítico é um indivíduo ativo na política de um grupo social. Pode ser formalmente reconhecido como membro ativo de um governo, ou uma pessoa que influencia a maneira como a sociedade é governada por meio de conhecimentos sobre poder político e dinâmica de grupo. Essa definição inclui pessoas que estão em cargos de decisão no governo, e pessoas que almejam esses cargos tanto por eleições, quanto por indicação, fraude eleitoral, hereditariedade, etc.
 
-### Cargos Politícos
+## Cargos Politícos
 
 * Governador
 * Deputado
@@ -49,7 +51,7 @@ O VotoLegal é um projeto **SEM FINS LUCRATIVOS**, seu único objetivo é munici
 
 > “Tente mover o mundo - o primeiro passo será mover a si mesmo.” - Platão
 
-# Hackeando com a gente
+## Hackeando com a gente
 
 Este é um projeto de código livre e aberto, mantido, exclusivamente, pela comunidade de desenvolvedores. Para colaborar entre na nossa lista de discussão: **votolegal@googlegroups.com**
 
