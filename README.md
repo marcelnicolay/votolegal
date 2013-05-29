@@ -43,6 +43,8 @@ O VotoLegal é uma ferramenta digital que aproxima os eleitores de seus cadidato
 
 O VotoLegal é um projeto SEM FINS LUCRATIVOS, seu único objetivo é municiar a população brasileira de informação.
 
+[http://votolegal.org](http://votolegal.org)
+
 “Tente mover o mundo - o primeiro passo será mover a si mesmo.” - Platão
 
 ## Draft inicial
