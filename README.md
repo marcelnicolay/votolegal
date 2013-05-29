@@ -1,4 +1,4 @@
-# Backgroud
+# Background
 
 ## O que é um Político?
 
