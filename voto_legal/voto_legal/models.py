@@ -3,7 +3,7 @@ import json
 import urllib
 
 from django.db import models
-from facebook import models as fb_models
+from django_facebook.models import FacebookCustomUser
 
 
 class Politico(models.Model):
@@ -36,13 +36,14 @@ class Politico(models.Model):
     @property
     def politicos_relacionados(self):
         return Politico.objects.filter(partido=self.partido, uf=self.uf).exclude(id=self.id)[:10]
-    
+
     def as_dict(self):
         return {
             'slug': self.slug,
             'imagem': self.imagem,
             'apelido': "%s (%s-%s)" % (self.apelido, self.partido.sigla, self.uf.sigla)
         }
+
 
 class Partido(models.Model):
     nome = models.CharField(max_length=100)
@@ -136,16 +137,16 @@ class NoticiaPolitico(models.Model):
 
 class NoticiaAcesso(models.Model):
     noticia = models.ForeignKey(Noticia)
-    facebook = models.ForeignKey(fb_models.FacebookProfile)
+    facebook = models.ForeignKey(FacebookCustomUser)
     count = models.IntegerField(default=0)
 
 
 class UsuarioExtra(models.Model):
-    user = models.OneToOneField(fb_models.FacebookProfile)
+    user = models.OneToOneField(FacebookCustomUser)
     uf = models.ForeignKey(UF, default=None, null=True)
     cidade = models.ForeignKey(Cidade, default=None, null=True)
     data_nascimento = models.DateField(default=None, null=True)
-    
+
     @property
     def politico_same_uf(self):
         return Politico.objects.filter(uf=self.uf)[:12]
@@ -173,7 +174,7 @@ class FacebookProfileManager(object):
         #    for friend in friends_list.get('data', []):
         #        my_friends_ids.append(int(friend['id']))
 
-        my_friends = fb_models.FacebookProfile.objects.filter(facebook_id__in=my_friends_ids)
+        my_friends = FacebookCustomUser.objects.filter(facebook_id__in=my_friends_ids)
         response = []
         for friend in my_friends.all():
             data = friend.get_facebook_profile()
@@ -187,5 +188,5 @@ class FacebookProfileManager(object):
 
 
 class Acompanhamento(models.Model):
-    usuario = models.ForeignKey(fb_models.FacebookProfile)
+    usuario = models.ForeignKey(FacebookCustomUser)
     politico = models.ForeignKey(Politico)

@@ -3,18 +3,13 @@
 <section class='container subhead'>
     <div class='row-fluid'>
         <div class='span2 photowrap'>
-            <img src="{{ facebook.picture }}"><br />
+            <img src="{{ fb_user.image.url }}"><br />
         </div>
         <div class='span10'>
-            {% if facebook.link %}<a href='{{ facebook.link }}' target='_blank' class='perfil-title'>{% endif %}<h1>{{ facebook.name }}</h1>{% if facebook.link %}</a>{% endif %}
+            {% if fb_user.facebook_profile_url %}<a href='{{ fb_user.facebook_profile_url }}' target='_blank' class='perfil-title'>{% endif %}<h1>{{ fb_user.facebook_name }}</h1>{% if fb_user.facebook_profile_url %}</a>{% endif %}
             <p class='info'>
-           {% if yearsold %}<span class='idade'>{{ yearsold }} anos</span>, {% endif %}{% if yearsold %}<span class='localizacao'>{{ facebook.location.name }}</span>{% endif %}
+           {% if yearsold %}<span class='idade'>{{ yearsold }} anos</span>, {% endif %}{% if yearsold %}{% endif %}
             </p>
-            {% if facebook.bio %}
-            <p class='lead'>
-                {{ facebook.bio }}
-            </p>
-            {% endif %}
         </div>
     </div>
 </section>
@@ -24,7 +19,7 @@
             <h2>Políticos vigiados</h2>
             {% for politico in politicos_que_sigo %}
             <div class="clearfix" style="border-bottom: 1px solid #ccc;padding:5px;">
-                <a href="{% url single_politico politico.slug %}">
+                <a href="{% url 'single_politico' politico.slug %}">
                 <img src="{{ politico.imagem }}" alt="{{ politico.nome }}" align="left" width="32">
                 <div style="padding-top:5px;padding-left:40px;">
                     {{ politico.apelido }}<br>

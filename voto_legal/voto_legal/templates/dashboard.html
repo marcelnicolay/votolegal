@@ -61,7 +61,7 @@
 
             {% for politico in politicos_que_sigo %}
             <div class="clearfix" style="border-bottom: 1px solid #ccc;padding:5px;">
-                <a href="{% url single_politico politico.slug %}">
+                <a href="{% url 'single_politico' politico.slug %}">
                 <img src="{{ politico.imagem }}" alt="{{ politico.nome }}" align="left" width="32">
                 <div style="padding-top:5px;padding-left:40px;">
                     {{ politico.apelido }}<br>
@@ -77,7 +77,7 @@
             {% if my_friends %}
             {% for friend in my_friends %}
             <div class="clearfix" style="border-bottom: 1px solid #ccc; padding: 5px;">
-                <a href="{% url perfil friend.fb_id %}">
+                <a href="{% url 'perfil' friend.fb_id %}">
                 <img src="{{ friend.picture }}" alt="{{ friend.name }}" align="left" height="32">
                 <div style="padding-top:5px;padding-left:60px;">
                     {{ friend.name }}
@@ -95,7 +95,7 @@
             
                 <ul class='politicos-estado'>
                     {% for politico in usuario_dados.politico_same_uf %}
-                        <li><a href='{% url single_politico politico.slug %}' title='{{ politico }}'><img src='{{ politico.imagem }}' width="32" /></a></li>
+                        <li><a href='{% url 'single_politico' politico.slug %}' title='{{ politico }}'><img src='{{ politico.imagem }}' width="32" /></a></li>
                     {% endfor %}
                 </ul>
             

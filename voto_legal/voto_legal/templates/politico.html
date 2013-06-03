@@ -163,7 +163,7 @@
                 
                 {% for politico in politico.politicos_relacionados %}
                 <div class="clearfix" style="border-bottom: 1px solid #ccc;padding:5px;">
-                    <a href="{% url single_politico politico.slug %}">
+                    <a href="{% url 'single_politico' politico.slug %}">
                     <img src="{{ politico.imagem }}" alt="{{ politico.nome }}" align="left" width="32">
                     <div style="padding-top:5px;padding-left:40px;">
                         {{ politico.apelido }}<br>

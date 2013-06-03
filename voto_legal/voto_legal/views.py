@@ -1,11 +1,12 @@
 import json
-from datetime import datetime
+from datetime import datetime, date
 
 from django.db.models import Q
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import logout
-from facebook.models import FacebookProfile
+from django.contrib.auth.models import User
+from django_facebook.models import FacebookCustomUser
 
 from voto_legal.models import (Acompanhamento, FacebookProfileManager, Politico,
     PoliticoCategoriaProjeto, DoadorPolitico, NoticiaAcesso, Noticia, UF, UsuarioExtra)
@@ -14,19 +15,19 @@ from voto_legal.models import (Acompanhamento, FacebookProfileManager, Politico,
 def home(request):
     if request.user.is_authenticated():
         page_render = 'dashboard.html'
-        facebook_profile = request.user.get_profile()
+        user = request.user
 
         try:
-            usuario_dados = UsuarioExtra.objects.get(user=facebook_profile)
+            usuario_dados = UsuarioExtra.objects.get(user=user)
         except UsuarioExtra.DoesNotExist:
             usuario_dados = None
-        
+
         politicos = []
-        for acomp in Acompanhamento.objects.filter(usuario=facebook_profile).all():
+        for acomp in Acompanhamento.objects.filter(usuario=user).all():
             politico = acomp.politico
             politicos.append(politico)
 
-        fb_profile_manager = FacebookProfileManager(facebook_profile)
+        fb_profile_manager = FacebookProfileManager(user)
         my_friends = fb_profile_manager.get_app_friends()
 
         context = {
@@ -48,24 +49,22 @@ def facebook_logout(request):
 
 
 def perfil_view(request, facebook_id):
-    facebook = get_object_or_404(FacebookProfile, facebook_id=facebook_id)
-    facebookdic = facebook.get_facebook_profile()
-    if facebookdic.get('birthday', ''):
-        t1 = datetime.strptime(facebookdic['birthday'], '%m/%d/%Y')
-        t2 = datetime.now()
-        tdelta = t2 - t1
+    fb_user = get_object_or_404(FacebookCustomUser, facebook_id=facebook_id)
+
+    if fb_user.date_of_birth:
+        t2 = date.today()
+        tdelta = t2 - fb_user.date_of_birth
         yearsold = int(float(tdelta.days) / 365.242199)
     else:
         yearsold = ''
 
     politicos = []
-    for acomp in Acompanhamento.objects.filter(usuario=facebook).all():
+    for acomp in Acompanhamento.objects.filter(usuario=fb_user).all():
         politico = acomp.politico
         politicos.append(politico)
 
-
     return render(request, 'perfil.html', {
-        "facebook": facebookdic,
+        "fb_user": fb_user,
         'yearsold': yearsold,
         'politicos_que_sigo': politicos,
     })
@@ -76,11 +75,11 @@ def politico_view(request, slug):
     categorias = PoliticoCategoriaProjeto.objects.filter(politico=politico)
     doadores = DoadorPolitico.objects.filter(politico=politico).order_by('-valor')[:10]
     noticias = politico.noticias.all()[:20]
-    
+
     user = request.user
     acompanhamento = None
     if not user.is_anonymous():
-        acompanhamento = Acompanhamento.objects.filter(usuario=user.get_profile(), politico=politico)
+        acompanhamento = Acompanhamento.objects.filter(usuario=user, politico=politico)
 
     total_relevantes = 0
     total_irrelevantes = 0
@@ -125,7 +124,7 @@ def ajax_politicos(request, nome):
 
 def ver_noticia(request, id):
     noticia = Noticia.objects.get(pk=id)
-    acessos, _ = NoticiaAcesso.objects.get_or_create(noticia=noticia, facebook=request.user.get_profile())
+    acessos, _ = NoticiaAcesso.objects.get_or_create(noticia=noticia, facebook=request.user)
     acessos.count += 1
     acessos.save()
 
@@ -146,20 +145,20 @@ def seguir_politico(request, slug):
 
     return HttpResponse(json.dumps(context), mimetype='application/json')
 
-def usuario_estado(request):
 
-    facebook_profile = request.user.get_profile()
+def usuario_estado(request):
     estado = UF.objects.get(id=request.GET.get('estado'))
-    
-    usuario_extra, _ = UsuarioExtra.objects.get_or_create(user = facebook_profile)
+
+    usuario_extra, _ = UsuarioExtra.objects.get_or_create(user=request.user)
     usuario_extra.uf = estado
     usuario_extra.save()
-    
+
     context = {
         'politicos': [p.as_dict() for p in usuario_extra.politico_same_uf]
     }
 
     return HttpResponse(json.dumps(context), mimetype='application/json')
+
 
 def esquecer_politico(request, slug):
     try:
@@ -167,8 +166,7 @@ def esquecer_politico(request, slug):
     except Politico.DoesNotExist:
         raise Http404
 
-    facebook_profile = request.user.get_profile()
-    politico.esquecer(facebook_profile)
+    politico.esquecer(request.user)
     context = {
         'status': 'ok',
     }
@@ -180,9 +178,8 @@ def politicos_que_sigo(request):
     if not request.user.is_authenticated():
         raise Http404
 
-    facebook_profile = request.user.get_profile().get_facebook_profile()
     politicos = []
-    for acomp in Acompanhamento.objects.filter(user=facebook_profile).all():
+    for acomp in Acompanhamento.objects.filter(user=request.user).all():
         politico = acomp.politico
         politicos.append({
             'nome': politico.nome,

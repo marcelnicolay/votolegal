@@ -1,52 +1,48 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from voto_legal.views import *
 from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'voto_legal.views.home', name='home'),
-    # url(r'^voto_legal/', include('voto_legal.foo.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
     # Logout redirect
-    url(r'^logout$', facebook_logout, name='facebook_logout'),
+    url(r'^logout$', 'voto_legal.views.facebook_logout', name='facebook_logout'),
 
     # Home template
-    url(r'^$', home, name='home'),
+    url(r'^$', 'voto_legal.views.home', name='home'),
 
     # Perfil de usuario template
     # Exemples:
     # perfil/fulano-da-silva
     # perfil/sicrano-soares
-    url(r'^perfil/(?P<facebook_id>[^/]+)/?$', perfil_view, name='perfil'),
+    url(r'^perfil/(?P<facebook_id>[^/]+)/?$', 'voto_legal.views.perfil_view', name='perfil'),
 
-    url(r'^usuario/estado?$', usuario_estado, name='usuario_estado'),
-    
+    url(r'^usuario/estado?$', 'voto_legal.views.usuario_estado', name='usuario_estado'),
+
     # Politico template
     # Exemples:
     # politico/fulano-da-silva
     # politico/sicrano-soares
-    url(r'^politico/(?P<slug>[^/]+)/?$', politico_view, name='single_politico'),
-    url(r'^politico/(?P<slug>[^/]+)/seguir/?$', seguir_politico, name='seguir_politico'),
-    url(r'^politico/(?P<slug>[^/]+)/esquecer/?$', esquecer_politico, name='esquecer_politico'),
-    url(r'^politicos/follow/?$', politicos_que_sigo, name="politicos_que_sigo"),
+    url(r'^politico/(?P<slug>[^/]+)/?$', 'voto_legal.views.politico_view', name='single_politico'),
+    url(r'^politico/(?P<slug>[^/]+)/seguir/?$', 'voto_legal.views.seguir_politico', name='seguir_politico'),
+    url(r'^politico/(?P<slug>[^/]+)/esquecer/?$', 'voto_legal.views.esquecer_politico', name='esquecer_politico'),
+    url(r'^politicos/follow/?$', 'voto_legal.views.politicos_que_sigo', name="politicos_que_sigo"),
 
     # Redirect Noticia template
     # Exemples:
     # ver/1429
     # ver/1044
-    url(r'^ver/(?P<id>[^/]+)/?$', ver_noticia, name='ver_noticia'),
+    url(r'^ver/(?P<id>[^/]+)/?$', 'voto_legal.views.ver_noticia', name='ver_noticia'),
 
     # Politicos archive template
-    url(r'^politicos?/?$', archive_politicos, name='archive_politicos'),
+    url(r'^politicos?/?$', 'voto_legal.views.archive_politicos', name='archive_politicos'),
 
-    url(r'^ajax/politicos/(?P<nome>[^/]+)/?$', ajax_politicos, name="ajax_politicos"),
+    url(r'^ajax/politicos/(?P<nome>[^/]+)/?$', 'voto_legal.views.ajax_politicos', name="ajax_politicos"),
 
-    # Facebook
-    url(r'^facebook/login$', 'facebook.views.login', name='facebook_login'),
-    url(r'^facebook/authentication_callback$', 'facebook.views.callback', name='facebook-callback'),
-
-    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    (r'^facebook/', include('django_facebook.urls')),
 )
+
+urlpatterns += staticfiles_urlpatterns()

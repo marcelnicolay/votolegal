@@ -32,5 +32,7 @@ pip-log.txt
 #Translations
 *.mo
 
+voto_legal/voto_legal/media
+
 #Mr Developer
 .mr.developer.cfg
