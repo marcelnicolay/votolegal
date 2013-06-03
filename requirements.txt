@@ -1,7 +1,6 @@
-Django
-south
-mysql-python
-pyquery
-https://github.com/marcelnicolay/simplexml/tarball/master
-django_facebook
-PIL
+Django==1.5.1
+PIL==1.1.7
+South==0.8.1
+django-facebook==5.2.1
+pyquery==1.2.4
+python-simplexml==0.1.4
